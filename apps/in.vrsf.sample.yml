@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: ssh://git@github.com:vrsf-homelab/kubernetes.git
+    repoURL: https://github.com/vrsf-homelab/kubernetes.git
     targetRevision: HEAD
     path: in.vrsf.sample
   destination:
