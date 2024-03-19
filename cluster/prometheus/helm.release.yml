@@ -1,0 +1,51 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: prometheus
+spec:
+  repo: https://prometheus-community.github.io/helm-charts
+  createNamespace: true
+  chart: kube-prometheus-stack
+  version: 57.0.3
+  targetNamespace: prometheus
+  valuesContent: |-
+    grafana:
+      enabled: false
+    prometheus:
+      prometheusSpec:
+        retention: 14d
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+      ingress:
+        enabled: true
+        annotations:
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+        hosts:
+          - prometheus.k8s.vrsf.in
+        tls:
+          - secretName: prometheus-tls
+            hosts:
+              - prometheus.k8s.vrsf.in
+      service:
+        type: LoadBalancer
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: prometheus.k8s.vrsf.in
+    kube-state-metrics:
+      metricLabelsAllowlist:
+        - nodes=[*]
+        - namespaces=[*]
+        - pods=[*]
+    kubeApiServer:
+      enabled: false
+    kubeScheduler:
+      enabled: false
+    kubeEtcd:
+      enabled: false
+    coreDns:
+      enabled: false
+    kubeControllerManager:
+      enabled: false
+    alertmanager:
+      enabled: false
