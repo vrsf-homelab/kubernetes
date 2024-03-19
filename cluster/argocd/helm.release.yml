@@ -1,0 +1,34 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChart
+metadata:
+  name: argocd
+spec:
+  repo: https://argoproj.github.io/argo-helm
+  chart: argo-cd
+  version: 6.7.2
+  targetNamespace: argocd
+  createNamespace: true
+  valuesContent: |-
+    global:
+      domain: argocd.vrsf.in
+
+    controller:
+      resources:
+        limits:
+          cpu: 500m
+          memory: 300Mi
+
+    server:
+      service:
+        type: LoadBalancer
+        annotations:
+          external-dns.alpha.kubernetes.io/hostname: argocd.vrsf.in
+
+      certificate:
+        enabled: true
+        issuer:
+          name: 'letsencrypt-prod'
+          kind: 'ClusterIssuer'
+
+    notifications:
+      enabled: false
