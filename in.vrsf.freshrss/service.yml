@@ -10,9 +10,9 @@ spec:
     run: freshrss
   type: LoadBalancer
   ports:
-  - name: freshrss-http
+  - name: http
     port: 80
-    protocol: TCP
-  - name: freshrss-https
+    targetPort: 80
+  - name: https
     port: 443
-    protocol: TCP
+    targetPort: 443
