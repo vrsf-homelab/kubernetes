@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: freshrss-ingress
+  labels:
+    name: freshrss-ingress
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: rss.vrsf.in
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+    - host: rss.vrsf.in
+      http:
+        paths:
+        - pathType: Prefix
+          path: "/"
+          backend:
+            service:
+              name: freshrss-service
+              port: 
+                number: 80
+  tls:
+    - secretName: freshrss-tls
+      hosts:
+        - rss.vrsf.in

@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: in.vrsf.sample
+  name: in.vrsf.freshrss
   namespace: argocd
 spec:
   destination:
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
-    path: in.vrsf.sample
+    path: in.vrsf.freshrss
     repoURL: 'https://github.com/vrsf-homelab/kubernetes.git'
     targetRevision: HEAD
   project: default

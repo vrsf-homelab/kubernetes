@@ -3,9 +3,6 @@ kind: Service
 metadata:
   name: freshrss-service
   namespace: freshrss
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: rss.vrsf.in
-    cert-manager.io/issuer: "letsencrypt-prod"
 spec:
   selector:
     run: freshrss
