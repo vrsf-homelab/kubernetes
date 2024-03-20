@@ -3,8 +3,6 @@ kind: Service
 metadata:
   name: freshrss-service
   namespace: freshrss
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: rss.vrsf.in
 spec:
   selector:
     run: freshrss
