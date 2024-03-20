@@ -4,14 +4,17 @@ metadata:
   name: in.vrsf.freshrss
   namespace: argocd
 spec:
-  destination:
-    namespace: default
-    server: 'https://kubernetes.default.svc'
+  project: default
   source:
     path: in.vrsf.freshrss
     repoURL: 'https://github.com/vrsf-homelab/kubernetes.git'
     targetRevision: HEAD
-  project: default
+  destination:
+    namespace: freshrss
+    server: 'https://kubernetes.default.svc'
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
     syncOptions:
       - CreateNamespace=true
