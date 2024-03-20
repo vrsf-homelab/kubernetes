@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: prometheus
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    targetRevision: 57.0.3
+    chart: kube-prometheus-stack
+    helm:
+      values: |-
+        grafana:
+          enabled: false
+        prometheus:
+          prometheusSpec:
+            retention: 14d
+            resources:
+              limits:
+                cpu: 500m
+                memory: 512Mi
+          service:
+            type: LoadBalancer
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: prometheus.k8s.vrsf.in
+        kube-state-metrics:
+          metricLabelsAllowlist:
+            - nodes=[*]
+            - namespaces=[*]
+            - pods=[*]
+        kubeApiServer:
+          enabled: false
+        kubeScheduler:
+          enabled: false
+        kubeEtcd:
+          enabled: false
+        coreDns:
+          enabled: false
+        kubeControllerManager:
+          enabled: false
+        alertmanager:
+          enabled: false
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
