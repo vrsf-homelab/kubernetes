@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: longhorn
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - chart: longhorn
+      repoURL: https://charts.longhorn.io/
+      targetRevision: v1.6.0
+      helm:
+        values: |-
+          preUpgradeChecker:
+            jobEnabled: false
+          service:
+            type: LoadBalancer
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            host: longhorn.k8s.vrsf.in
+            tls: true
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          longhornManager:
+            log:
+              format: json
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: longhorn-system
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - ServerSideApply=true
+    automated:
+      prune: false
+      selfHeal: true
