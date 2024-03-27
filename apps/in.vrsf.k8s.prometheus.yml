@@ -22,7 +22,15 @@ spec:
             resources:
               limits:
                 cpu: 500m
-                memory: 512Mi
+                memory: 1024Mi
+            storageSpec:
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: longhorn
+                  accessModes: ["ReadWriteMany"]
+                  resources:
+                    requests:
+                      storage: 5Gi
           service:
             type: LoadBalancer
             annotations:
