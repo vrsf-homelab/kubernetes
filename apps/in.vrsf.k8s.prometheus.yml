@@ -7,9 +7,9 @@ spec:
   project: default
   destination:
     namespace: prometheus
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
   source:
-    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    repoURL: "https://prometheus-community.github.io/helm-charts"
     targetRevision: 57.0.3
     chart: kube-prometheus-stack
     helm:
@@ -17,6 +17,9 @@ spec:
         grafana:
           enabled: false
         prometheus:
+          podDisruptionBudget:
+            enabled: true
+            minAvailable: 1
           prometheusSpec:
             retention: 14d
             resources:
@@ -30,7 +33,7 @@ spec:
                   accessModes: ["ReadWriteMany"]
                   resources:
                     requests:
-                      storage: 5Gi
+                      storage: 10Gi
           service:
             type: LoadBalancer
             annotations:
