@@ -13,6 +13,8 @@ spec:
       domain: argocd.vrsf.in
 
     controller:
+      args:
+        appResyncPeriod: 60
       resources:
         limits:
           cpu: 500m
