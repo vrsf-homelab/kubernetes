@@ -1,20 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cloudflared
+  name: cloudflared-argocd
   namespace: cloudflared
+  labels:
+    cloudflared-tunnel: argocd-homelab
 spec:
   selector:
     matchLabels:
-      app: cloudflared
+      app: cloudflared-argocd
   replicas: 2
   template:
     metadata:
       labels:
-        app: cloudflared
+        app: cloudflared-argocd
     spec:
       containers:
-        - name: cloudflared
+        - name: cloudflared-argocd
           image: cloudflare/cloudflared:2024.3.0
           args:
             - tunnel
@@ -45,13 +47,13 @@ spec:
       volumes:
         - name: creds
           secret:
-            secretName: cloudflared-tunnel-credentials
+            secretName: cloudflared-tunnel-argocd-credentials
         - name: cert
           secret:
-            secretName: cloudflared-certificate
+            secretName: cloudflared-domain-vrsfin-certificate
         - name: config
           configMap:
-            name: cloudflared
+            name: cloudflared-config-argocd
             items:
               - key: config.yaml
                 path: config.yaml

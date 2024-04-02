@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: cloudflared-argocd
+  namespace: cloudflared
+  labels:
+    cloudflared-tunnel: argocd-homelab
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: cloudflared-argocd
