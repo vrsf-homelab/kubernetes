@@ -10,7 +10,7 @@ spec:
   createNamespace: true
   valuesContent: |-
     global:
-      domain: argocd.vrsf.in
+      domain: acd.vrsf.in
 
     controller:
       args:
@@ -23,8 +23,6 @@ spec:
     server:
       service:
         type: LoadBalancer
-        annotations:
-          external-dns.alpha.kubernetes.io/hostname: argocd.vrsf.in
 
       certificate:
         enabled: true
