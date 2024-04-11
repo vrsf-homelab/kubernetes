@@ -18,7 +18,7 @@ spec:
           ingress:
             enabled: true
             ingressClassName: nginx
-            host: longhorn.k8s.vrsf.in
+            host: longhorn.vrsf.in
             tls: true
             annotations:
               cert-manager.io/cluster-issuer: "letsencrypt-prod"
