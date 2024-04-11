@@ -6,12 +6,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://kubernetes.github.io/ingress-nginx'
+    repoURL: "https://kubernetes.github.io/ingress-nginx"
     targetRevision: 4.10.0
     chart: ingress-nginx
   destination:
     namespace: ingress-controller
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
   syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
     syncOptions:
       - CreateNamespace=true

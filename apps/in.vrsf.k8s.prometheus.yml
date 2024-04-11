@@ -33,7 +33,7 @@ spec:
                   accessModes: ["ReadWriteMany"]
                   resources:
                     requests:
-                      storage: 10Gi
+                      storage: 20Gi
           service:
             type: LoadBalancer
             annotations:
