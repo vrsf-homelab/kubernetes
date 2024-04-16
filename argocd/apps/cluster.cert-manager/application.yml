@@ -22,6 +22,14 @@ spec:
           limits:
             cpu: 100m
             memory: 256Mi
+        extraArgs:
+          - --logging-format=json
+        webhook:
+          extraArgs:
+            - --logging-format=json
+        cainjector:
+          extraArgs:
+            - --logging-format=json
   destination:
     namespace: cert-manager
     server: "https://kubernetes.default.svc"

@@ -23,9 +23,11 @@ spec:
               maxSurge: 25%
               maxUnavailable: 25%
 
+        configs:
+          cm:
+            timeout.reconciliation: 15s
+
         controller:
-          args:
-            appResyncPeriod: 60
           resources:
             limits:
               cpu: 500m
