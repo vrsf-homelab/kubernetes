@@ -3,3 +3,7 @@ values.origin.yml
 ## Secrets
 secret*.yml
 !secret*.yml.dist
+
+
+### temp
+cluster.loki
