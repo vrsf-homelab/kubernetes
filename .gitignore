@@ -1,7 +1,8 @@
 values.origin.yml
 
 ## Secrets
-secret*.yml
+.sops.yml
+secret.y*ml
 !secret*.yml.dist
 
 
