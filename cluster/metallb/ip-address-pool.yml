@@ -1,8 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: loadbalancer-pool
-  namespace: metallb-system
-spec:
-  addresses:
-  - 10.69.36.1-10.69.36.100

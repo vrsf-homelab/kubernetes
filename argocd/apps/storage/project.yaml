@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: storage
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Storage things like NFS, Longhorn, etc.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: longhorn-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"

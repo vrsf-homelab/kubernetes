@@ -1,10 +1,7 @@
-values.origin.yml
-
 ## Secrets
-.sops.yml
-secret.y*ml
-!secret*.yml.dist
+secret*.y*ml
+*.secret.y*ml
+!secret.enc.y*ml
 
-
-### temp
-cluster.loki
+## Temp
+repositories/

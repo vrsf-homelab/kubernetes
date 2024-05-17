@@ -5,12 +5,17 @@ metadata:
 spec:
   repo: https://argoproj.github.io/argo-helm
   chart: argo-cd
-  version: 6.7.11
-  targetNamespace: argocd
+  version: 6.7.18
+  targetNamespace: argo-system
   createNamespace: true
   valuesContent: |-
     global:
       domain: argocd.vrsf.in
+      revisionHistoryLimit: 3
+
+      image:
+        repository: vertisan/argocd
+        tag: v2.10.7-20240419.02
 
       logging:
         format: json
@@ -21,9 +26,22 @@ spec:
           maxSurge: 25%
           maxUnavailable: 25%
 
+    crds:
+      install: true
+      keep:  false
+
+    configs:
+      cm:
+        kustomize.buildOptions: "--enable-helm"
+        users.anonymous.enabled: "false"
+        timeout.reconciliation: 15s
+        helm.valuesFileSchemes: >-
+          secrets+gpg-import, secrets+gpg-import-kubernetes,
+          secrets+age-import, secrets+age-import-kubernetes,
+          secrets,secrets+literal,
+          http,https
+
     controller:
-      args:
-        appResyncPeriod: 60
       resources:
         limits:
           cpu: 500m
@@ -40,6 +58,11 @@ spec:
           nginx.ingress.kubernetes.io/ssl-passthrough: "true"
           nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
         tls: true
+
+    repoServer:
+      envFrom:
+        - secretRef:
+            name: argocd-aws-creds
 
     notifications:
       enabled: false

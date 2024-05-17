@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Home of ArgoCD.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: argo-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
