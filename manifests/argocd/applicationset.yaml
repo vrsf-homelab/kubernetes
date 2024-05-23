@@ -1,0 +1,60 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Home of ArgoCD.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: argo-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+    - namespace: kube-system
+      server: https://kubernetes.default.svc
+      name: in-cluster
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: argocd
+  namespace: argo-system
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        revision: &revision as-argocd
+        directories:
+          - path: "manifests/argocd/*"
+          - exclude: true
+            path: "manifests/argocd/*.disabled"
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: "{{ path.basenameNormalized }}"
+      labels:
+        app-group: argocd
+    spec:
+      project: argocd
+      source:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        targetRevision: *revision
+        path: "{{ path }}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
