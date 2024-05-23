@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+  - resources/storage-class.yaml
+
+namespace: nfs-csi-system
+
+helmCharts:
+  - name: nfs-csi-storage
+    repo: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+    version: 4.6.0
+    releaseName: csi-driver-nfs
+    namespace: nfs-csi-system
+    includeCRDs: true
