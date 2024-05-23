@@ -1,0 +1,12 @@
+preUpgradeChecker:
+  jobEnabled: false
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  host: longhorn.vrsf.in
+  tls: true
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+longhornManager:
+  log:
+    format: json

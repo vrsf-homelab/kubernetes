@@ -5,3 +5,6 @@ secret*.y*ml
 
 ## Temp
 repositories/
+
+## Kustomize
+charts/
