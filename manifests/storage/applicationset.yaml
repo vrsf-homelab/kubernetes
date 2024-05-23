@@ -12,15 +12,8 @@ spec:
     - "*"
 
   destinations:
-    - namespace: longhorn-system
-      server: https://kubernetes.default.svc
-      name: in-cluster
-    - namespace: nfs-csi-system
-      server: https://kubernetes.default.svc
-      name: in-cluster
-    - namespace: kube-system
-      server: https://kubernetes.default.svc
-      name: in-cluster
+    - namespace: "*"
+      server: "*"
 
   clusterResourceWhitelist:
     - group: "*"
