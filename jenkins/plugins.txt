@@ -21,6 +21,7 @@ kubernetes:4219.v40ff98cfb_d6f
 ldap:725.v3cb_b_711b_1a_ef
 mailer:472.vf7c289a_4b_420
 nodejs:1.6.1
+oidc-provider:62.vd67c19f76766
 pam-auth:1.10
 parameterized-trigger:806.vf6fff3e28c3e
 pipeline-aws:1.45

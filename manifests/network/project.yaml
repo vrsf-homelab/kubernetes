@@ -1,23 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: ci-cd
+  name: network
   namespace: argo-system
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: CI/CD things.
+  description: Network things like MetalLB, Ingress, etc.
 
   sourceRepos:
     - "*"
 
   destinations:
-    - namespace: jenkins
-      server: https://kubernetes.default.svc
-      name: in-cluster
-    - namespace: kube-system
-      server: https://kubernetes.default.svc
-      name: in-cluster
+    - namespace: "*"
+      server: "*"
 
   clusterResourceWhitelist:
     - group: "*"
