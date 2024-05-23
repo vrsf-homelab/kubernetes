@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: storage
+  name: argocd
   namespace: argo-system
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Storage things like NFS, Longhorn, etc.
+  description: Home of ArgoCD.
 
   sourceRepos:
     - "*"
@@ -22,29 +22,29 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: storage
+  name: argocd
   namespace: argo-system
 spec:
   generators:
     - git:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
-        revision: master
+        revision: &revision as-argocd
         directories:
-          - path: "manifests/storage/*"
+          - path: "manifests/argocd/*"
           - exclude: true
-            path: "manifests/storage/*.disabled"
+            path: "manifests/argocd/*.disabled"
   syncPolicy:
     preserveResourcesOnDeletion: false
   template:
     metadata:
       name: "{{ path.basenameNormalized }}"
       labels:
-        app-group: storage
+        app-group: argocd
     spec:
-      project: storage
+      project: argocd
       source:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
-        targetRevision: master
+        targetRevision: *revision
         path: "{{ path }}"
       destination:
         server: https://kubernetes.default.svc

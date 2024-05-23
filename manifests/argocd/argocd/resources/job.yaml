@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: decrypt-secrets
+  namespace: argo-system
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+spec:
+  template:
+    spec:
+      containers:
+        - name: decrypt-secrets
+          image: vertisan/argocd:0.2112.1
+          command: ["decrypt-secrets.sh"]
+      restartPolicy: OnFailure

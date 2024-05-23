@@ -1,4 +1,7 @@
-ARG ARGOCD_VERSION=v2.10.7
+ARG ARGOCD_VERSION=v2.11.2
+ARG KSOPS_VERSION=v4.3.1
+
+FROM quay.io/viaductoss/ksops:${KSOPS_VERSION} as ksops-builder
 
 FROM quay.io/argoproj/argocd:${ARGOCD_VERSION}
 
@@ -19,7 +22,7 @@ USER root
 
 # Install requirements
 RUN apt-get update \
-    && apt-get install -y curl gnupg
+    && apt-get install --no-install-recommends -y curl gnupg
 
 # Install SOPS
 RUN curl -LO https://github.com/getsops/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64 \
@@ -39,6 +42,15 @@ RUN curl -LO https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubec
 
 # Prepare helm-secrets
 RUN ln -sf "$(helm env HELM_PLUGINS)/helm-secrets/scripts/wrapper/helm.sh" /usr/local/sbin/helm
+
+# Copy decrypt script for Helm Secrets
+COPY decrypt-secrets.sh /usr/local/sbin/decrypt-secrets.sh
+
+# Override the default kustomize executable with the Go built version
+COPY --from=ksops-builder /usr/local/bin/kustomize /usr/local/bin/kustomize
+
+# Add ksops executable to path
+COPY --from=ksops-builder /usr/local/bin/ksops /usr/local/bin/ksops
 
 # Cleanup
 RUN apt-get autoremove -y \
