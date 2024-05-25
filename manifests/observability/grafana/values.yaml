@@ -64,9 +64,9 @@ dashboardProviders:
         options:
           path: /var/lib/grafana/dashboards/kubernetes
 dashboardsConfigMaps:
-  default: dashboards-default
-  argocd: dashboards-argocd
-  kubernetes: dashboards-kubernetes
+  default: grafana-dashboards-default
+  argocd: grafana-dashboards-argocd
+  kubernetes: grafana-dashboards-kubernetes
 
 datasources:
   datasources.yaml:
