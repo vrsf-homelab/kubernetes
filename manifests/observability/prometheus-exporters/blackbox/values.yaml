@@ -1,0 +1,18 @@
+serviceMonitor:
+  enabled: true
+  defaults:
+    labels:
+      release: prometheus
+  targets:
+    - name: vrs-factory-dev
+      url: https://vrs-factory.dev
+    - name: vrs-factory-pl
+      url: https://vrs-factory.pl
+    - name: homelab-argocd
+      url: https://argocd.vrsf.in
+    - name: homelab-grafana
+      url: https://grafana.vrsf.in
+    - name: homelab-prometheus
+      url: https://prometheus.vrsf.in
+    - name: homelab-jenkins
+      url: https://jenkins.vrsf.in
