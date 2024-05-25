@@ -1,0 +1,43 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace grafana
+
+helmCharts:
+  - name: grafana
+    repo: https://grafana.github.io/helm-charts
+    version: 7.3.9
+    releaseName: grafana
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
+
+generators:
+  - generators/sops-generator.yaml
+
+configMapGenerator:
+  - name: grafana-dashboards-default
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+    files:
+      - configs/dashboards/default/blackbox-general.json
+      - configs/dashboards/default/ga-general.json
+      - configs/dashboards/default/mikrotik-general.json
+      - configs/dashboards/default/proxmox-general.json
+  - name: grafana-dashboards-argocd
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+    files:
+      - configs/dashboards/argocd/argocd-general.json
+      - configs/dashboards/argocd/argocd-application-overview.json
+      - configs/dashboards/argocd/argocd-operational-overview.json
+  - name: grafana-dashboards-kubernetes
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+    files:
+      - configs/dashboards/kubernetes/k8s-general.json
+      - configs/dashboards/kubernetes/k8s-nodes.json
+      - configs/dashboards/kubernetes/k8s-pods.json

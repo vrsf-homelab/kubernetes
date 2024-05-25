@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: observability
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Homelab monitoring stuff like Prometheus, Grafana, alarms, etc.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: "*"
+      server: "*"
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: observability
+  namespace: argo-system
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        revision: &revision observability
+        directories:
+          - path: "manifests/observability/*"
+          - path: "manifests/observability/*.disabled"
+            exclude: true
+          - path: "manifests/observability/*.static"
+            exclude: true
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: "{{ path.basenameNormalized }}"
+      labels:
+        app-group: argocd
+    spec:
+      project: argocd
+      source:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        targetRevision: *revision
+        path: "{{ path }}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true

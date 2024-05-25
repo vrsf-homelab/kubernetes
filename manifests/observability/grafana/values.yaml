@@ -1,0 +1,92 @@
+podDisruptionBudget:
+  minAvailable: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+
+grafana.ini:
+  server:
+    root_url: https://grafana.vrsf.in
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - grafana.vrsf.in
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.vrsf.in
+
+persistence:
+  enabled: true
+  storageClassName: nfs-csi
+  accessModes:
+    - ReadWriteMany
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+      - name: "default"
+        orgId: 1
+        type: file
+        disableDeletion: false
+        editable: true
+        allowUiUpdates: true
+        options:
+          path: /var/lib/grafana/dashboards/default
+      - name: "argocd"
+        orgId: 1
+        type: file
+        folder: "ArgoCD"
+        disableDeletion: false
+        editable: true
+        allowUiUpdates: true
+        options:
+          path: /var/lib/grafana/dashboards/argocd
+      - name: "kubernetes"
+        orgId: 1
+        type: file
+        folder: "Kubernetes"
+        disableDeletion: false
+        editable: true
+        allowUiUpdates: true
+        options:
+          path: /var/lib/grafana/dashboards/kubernetes
+dashboardsConfigMaps:
+  default: dashboards-default
+  argocd: dashboards-argocd
+  kubernetes: dashboards-kubernetes
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Kubernetes
+        type: prometheus
+        uid: PA37D07FE30048D3A
+        access: proxy
+        orgId: 1
+        url: https://prometheus.vrsf.in
+        isDefault: true
+      - name: NAS
+        type: prometheus
+        uid: CDJXD4RE6MU4GB
+        access: proxy
+        orgId: 1
+        url: http://10.69.20.1:10190
+        isDefault: false
+
+admin:
+  existingSecret: "grafana-admin-credentials"
+  userKey: adminUser
+  passwordKey: adminPassword
