@@ -28,7 +28,7 @@ spec:
   generators:
     - git:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
-        revision: &revision observability
+        revision: &revision master
         directories:
           - path: "manifests/observability/*"
           - path: "manifests/observability/*.disabled"
