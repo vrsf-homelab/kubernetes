@@ -1,6 +1,3 @@
-resources:
-  - resources/namespace.yaml
-
 namespace: &namespace prometheus
 
 helmCharts:
