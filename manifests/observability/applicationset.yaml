@@ -41,9 +41,9 @@ spec:
     metadata:
       name: "{{ path.basenameNormalized }}"
       labels:
-        app-group: argocd
+        app-group: observability
     spec:
-      project: argocd
+      project: observability
       source:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
         targetRevision: *revision
