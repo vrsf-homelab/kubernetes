@@ -1,0 +1,56 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: example
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Example project for testing.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: "*"
+      server: "*"
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: example
+  namespace: argo-system
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        revision: &revision example
+        directories:
+          - path: "manifests/example/*"
+          - exclude: true
+            path: "manifests/example/*.disabled"
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: "{{ path.basenameNormalized }}"
+      labels:
+        app-group: argocd
+    spec:
+      project: argocd
+      source:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        targetRevision: *revision
+        path: "{{ path }}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
