@@ -1,0 +1,32 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+    name: letsencrypt-prod
+    namespace: cert-manager
+spec:
+    acme:
+        server: https://acme-v02.api.letsencrypt.org/directory
+        email: ENC[AES256_GCM,data:e2KBbfkUSo7nJ/eUwZsG63IrR4+f,iv:+2wSYM2/Ge01mWB5fPMrRRk+GBb6navDNeovj4mgAQI=,tag:wY+bc154bloZ4N0Fb8xRBw==,type:str]
+        privateKeySecretRef:
+            name: letsencrypt-prod
+        solvers:
+            - dns01:
+                cloudflare:
+                    apiTokenSecretRef:
+                        name: cloudflare-token
+                        key: apiToken
+sops:
+    kms:
+        - arn: arn:aws:kms:eu-central-1:542006288021:alias/vrsf-homelab-sops
+          created_at: "2024-05-26T21:36:01Z"
+          enc: AQICAHj2f6hX57IyUZVNikxpVJx/MjmH6V3LyiVB5s8g4JDAAAHjZcOJOuL9M5qPdU+55O+sAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMroQW1DQOan3u8kdWAgEQgDvkGeEnLl/wxzt13RccpOroaU+QS41Bk2SQd6xUupzmvt1jqC9Dk6cKsNUxIuEHI9NlchvPSira+W9UEw==
+          aws_profile: ""
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2024-05-26T21:36:02Z"
+    mac: ENC[AES256_GCM,data:cM1t3VT254PQev824aP124DSIP+qnEmMFdFH5beL0lPGPLT1k1WT0uWIaNTJZYUECwT4kpoNFI1hgyaPoiF7y9NSjEjpk4ZW0Zk8l96AKoKzd7eP79/XdQNY380pGb6Egd6k8QEhNZvKxG0re6DY80YXgdFV9qmViKq2flAyc+w=,iv:GBFDHPCLFEVb80vIyjEXmn4HFisvvYqYremEDi2FcMs=,tag:JNURKofUQlfeoX+Ie7XiJA==,type:str]
+    pgp: []
+    encrypted_regex: ^(data|stringData|email)$
+    version: 3.8.1

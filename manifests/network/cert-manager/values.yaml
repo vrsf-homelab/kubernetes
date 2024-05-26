@@ -1,0 +1,18 @@
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+extraArgs:
+  - --logging-format=json
+webhook:
+  extraArgs:
+    - --logging-format=json
+cainjector:
+  extraArgs:
+    - --logging-format=json
