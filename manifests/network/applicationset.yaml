@@ -28,7 +28,7 @@ spec:
   generators:
     - git:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
-        revision: &revision network
+        revision: &revision master
         directories:
           - path: "manifests/network/*"
           - path: "manifests/network/*.disabled"
