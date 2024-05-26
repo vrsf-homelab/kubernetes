@@ -9,8 +9,8 @@ prometheus:
     retention: 14d
     resources:
       limits:
-        cpu: 1000m
-        memory: 2048Mi
+        cpu: 1500m
+        memory: 3072Mi
     storageSpec:
       volumeClaimTemplate:
         spec:
