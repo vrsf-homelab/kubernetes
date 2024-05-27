@@ -43,9 +43,6 @@ RUN curl -LO https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubec
 # Prepare helm-secrets
 RUN ln -sf "$(helm env HELM_PLUGINS)/helm-secrets/scripts/wrapper/helm.sh" /usr/local/sbin/helm
 
-# Copy decrypt script for Helm Secrets
-COPY decrypt-secrets.sh /usr/local/sbin/decrypt-secrets.sh
-
 # Override the default kustomize executable with the Go built version
 COPY --from=ksops-builder /usr/local/bin/kustomize /usr/local/bin/kustomize
 
