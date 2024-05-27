@@ -1,0 +1,15 @@
+resources:
+  - resources/namespace.yaml
+  - resources/ip-address-pool.yaml
+  - resources/l2-advertisement.yaml
+
+namespace: &namespace metallb-system
+
+helmCharts:
+  - name: metallb
+    repo: https://metallb.github.io/metallb
+    version: 0.14.5 # https://metallb.universe.tf/release-notes/
+    releaseName: metallb
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true

@@ -1,6 +1,9 @@
 resources:
   - resources/namespace.yaml
 
+## https://github.com/kubernetes-sigs/kustomize/issues/4593
+# namespace: &namespace cert-manager
+
 helmCharts:
   - name: cert-manager
     repo: https://charts.jetstack.io

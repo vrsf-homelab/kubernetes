@@ -1,0 +1,10 @@
+speaker:
+  resources:
+    limits:
+      cpu: 75m
+      memory: 150Mi
+controller:
+  resources:
+    limits:
+      cpu: 100m
+      memory: 100Mi
