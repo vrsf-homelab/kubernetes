@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace ingress-controller
+
+helmCharts:
+  - name: ingress-nginx
+    repo: https://kubernetes.github.io/ingress-nginx
+    version: 4.10.0
+    releaseName: nginx-ingress
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
