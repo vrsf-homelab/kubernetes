@@ -33,7 +33,7 @@ spec:
           - path: "manifests/observability/*"
           - path: "manifests/observability/*.disabled"
             exclude: true
-          - path: "manifests/observability/*.static"
+          - path: "manifests/observability/*.standalone"
             exclude: true
   syncPolicy:
     preserveResourcesOnDeletion: false

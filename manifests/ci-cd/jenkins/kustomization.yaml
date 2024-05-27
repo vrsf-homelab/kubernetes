@@ -1,0 +1,16 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace jenkins
+
+generators:
+  - generators/sops-generator.yaml
+
+helmCharts:
+  - name: jenkins
+    releaseName: jenkins
+    repo: https://charts.jenkins.io
+    version: 5.1.23 # https://artifacthub.io/packages/helm/jenkinsci/jenkins?modal=changelog
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true

@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  name: argocd
+  name: ci-cd
   namespace: argo-system
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: Home of ArgoCD.
+  description: CI/CD things.
 
   sourceRepos:
     - "*"
@@ -22,7 +22,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: argocd
+  name: ci-cd
   namespace: argo-system
 spec:
   generators:
@@ -30,10 +30,10 @@ spec:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
         revision: &revision master
         directories:
-          - path: "manifests/argocd/*"
-          - path: "manifests/argocd/*.disabled"
+          - path: "manifests/ci-cd/*"
+          - path: "manifests/ci-cd/*.disabled"
             exclude: true
-          - path: "manifests/argocd/*.standalone"
+          - path: "manifests/ci-cd/*.standalone"
             exclude: true
   syncPolicy:
     preserveResourcesOnDeletion: false
@@ -41,9 +41,9 @@ spec:
     metadata:
       name: "{{ path.basenameNormalized }}"
       labels:
-        app-group: argocd
+        app-group: ci-cd
     spec:
-      project: argocd
+      project: ci-cd
       source:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
         targetRevision: *revision

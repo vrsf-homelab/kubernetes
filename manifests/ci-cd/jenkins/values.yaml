@@ -1,0 +1,75 @@
+controller:
+  image:
+    repository: vertisan/jenkins
+    tag: "1.0.0"
+
+  installPlugins: false
+
+  admin:
+    existingSecret: jenkins-credentials
+    userKey: adminUsername
+    passwordKey: adminPassword
+
+  jenkinsAdminEmail: hello@vrs-factory.dev
+
+  resources:
+    requests:
+      cpu: "100m"
+      memory: "1024Mi"
+    limits:
+      cpu: "500m"
+      memory: "2048Mi"
+
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 1
+
+  tolerations:
+    - key: dedicated
+      operator: Equal
+      value: jenkins
+      effect: NoSchedule
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    hostName: jenkins.vrsf.in
+    ingressClassName: nginx
+    tls:
+      - secretName: jenkins-tls
+        hosts:
+          - jenkins.vrsf.in
+
+agent:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 512m
+      memory: 1024Mi
+
+  podName: jenkins-agent-generic
+
+  yamlTemplate: |-
+    apiVersion: v1
+    kind: Pod
+    spec:
+      tolerations:
+        - key: dedicated
+          operator: Equal
+          value: jenkins
+          effect: NoSchedule
+
+additionalAgents:
+  dind:
+    podName: jenkins-agent-dind
+    customJenkinsLabels: dind
+    image:
+      repository: vertisan/dind
+      tag: 26.0-3.19-20240408
+
+persistence:
+  size: 10Gi
+  storageClass: nfs-csi
