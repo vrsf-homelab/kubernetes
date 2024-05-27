@@ -14,7 +14,7 @@ spec:
         - secrets://values.secrets.enc.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: prometheus
+    namespace: prometheus-exporter
   syncPolicy:
     syncOptions:
       - CreateNamespace=true

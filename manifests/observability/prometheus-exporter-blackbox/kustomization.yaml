@@ -1,4 +1,4 @@
-namespace: &namespace prometheus
+namespace: &namespace prometheus-exporter
 
 helmCharts:
   - name: prometheus-blackbox-exporter
