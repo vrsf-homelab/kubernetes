@@ -29,7 +29,8 @@ ingress:
 
 persistence:
   enabled: true
-  storageClassName: nfs-csi
+  storageClassName: nfs-csi-retain
+  size: 20Gi
   accessModes:
     - ReadWriteMany
 

@@ -71,5 +71,5 @@ additionalAgents:
       tag: 26.0-3.19-20240408
 
 persistence:
-  size: 10Gi
-  storageClass: nfs-csi
+  size: 20Gi
+  storageClass: nfs-csi-retain
