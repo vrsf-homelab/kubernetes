@@ -4,56 +4,7 @@ serviceMonitor:
     release: prometheus
 
 config:
-  mktxp: |
-    [VRS-Mikrotik]
-        hostname = 10.69.0.1
-        username = mktxp
-        password = "j5#ou6dM@w9sTg"
-        port = 8728
-
-    [default]
-        check_for_updates = True
-        poe = True
-        user = True
-        use_ssl = False
-        wireless_clients = True
-        capsman = True
-        pool = True
-        queue = True
-        interface = True
-        monitor = True
-        wireless = True
-        use_comments_over_names = True
-        kid_control_devices = False
-        public_ip = True
-        firewall = True
-        no_ssl_certificate = False
-        ipv6_neighbor = False
-        connections = True
-        dhcp_lease = True
-        installed_packages = True
-        capsman_clients = True
-        route = True
-        enabled = True
-        netwatch = True
-        ipv6_firewall = False
-        connection_stats = True
-        ssl_certificate_verify = False
-        dhcp = True
-        remote_dhcp_entry = None
-
-  _mktxp: |
-    [MKTXP]
-        port = 49090
-        socket_timeout = 2
-        initial_delay_on_failure = 120
-        max_delay_on_failure = 900
-        delay_inc_div = 5
-        bandwidth = True
-        bandwidth_test_interval = 420
-        minimal_collect_interval = 5
-        verbose_mode = False
-        fetch_routers_in_parallel = False
-        max_worker_threads = 5
-        max_scrape_duration = 10
-        total_max_scrape_duration = 30
+  router:
+    existingSecret: mikrotik-router-config
+  scrapper:
+    existingSecret: mikrotik-scrapper-config

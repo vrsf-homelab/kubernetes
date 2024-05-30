@@ -1,6 +1,6 @@
 ## Secrets
 secret*.y*ml
-!secret.enc.y*ml
+!secret*.enc.y*ml
 cluster-issuer.yaml
 
 ## Temp
