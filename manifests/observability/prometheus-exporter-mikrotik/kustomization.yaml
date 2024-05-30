@@ -7,3 +7,6 @@ helmCharts:
     releaseName: prometheus-mikrotik-exporter
     namespace: *namespace
     valuesFile: values.yaml
+
+generators:
+  - generators/sops-generator.yaml

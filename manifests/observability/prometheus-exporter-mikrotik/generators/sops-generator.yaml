@@ -1,0 +1,12 @@
+apiVersion: viaduct.ai/v1
+kind: ksops
+metadata:
+  name: sops-generator
+  namespace: grafana
+  annotations:
+    config.kubernetes.io/function: |
+      exec:
+        path: ksops
+files:
+  - resources/secret-router-config.enc.yaml
+  - resources/secret-scrapper-config.enc.yaml
