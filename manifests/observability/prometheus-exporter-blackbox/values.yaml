@@ -4,15 +4,15 @@ serviceMonitor:
     labels:
       release: prometheus
   targets:
-    - name: VRS-Factory
+    - name: vrs-factory
       url: https://vrs-factory.dev
-    - name: VRS-Factory-pl
+    - name: vrs-factory-pl
       url: https://vrs-factory.pl
-    - name: ArgoCD
+    - name: argocd
       url: https://argocd.vrsf.in
-    - name: Grafana
+    - name: grafana
       url: https://grafana.vrsf.in
-    - name: Prometheus
+    - name: prometheus
       url: https://prometheus.vrsf.in
-    - name: Jenkins
+    - name: jenkins
       url: https://jenkins.vrsf.in/login
