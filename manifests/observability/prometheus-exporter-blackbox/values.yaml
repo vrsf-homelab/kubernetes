@@ -4,9 +4,9 @@ serviceMonitor:
     labels:
       release: prometheus
   targets:
-    - name: VRS-Factory.dev
+    - name: VRS-Factory
       url: https://vrs-factory.dev
-    - name: VRS-Factory.pl
+    - name: VRS-Factory-pl
       url: https://vrs-factory.pl
     - name: ArgoCD
       url: https://argocd.vrsf.in
