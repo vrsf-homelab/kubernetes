@@ -15,4 +15,4 @@ serviceMonitor:
     - name: homelab-prometheus
       url: https://prometheus.vrsf.in
     - name: homelab-jenkins
-      url: https://jenkins.vrsf.in
+      url: https://jenkins.vrsf.in/login
