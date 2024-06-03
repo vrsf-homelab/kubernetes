@@ -1,4 +1,4 @@
-ARG VERSION=2.458-jdk17
+ARG VERSION=2.460-jdk17
 
 FROM jenkins/jenkins:${VERSION}
 
