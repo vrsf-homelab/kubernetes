@@ -1,9 +1,9 @@
 controller:
-  # image:
-  #   repository: vertisan/jenkins
-  #   tag: "1.1.0"
+  image:
+    repository: vertisan/jenkins
+    tag: "1.1.0"
 
-  # installPlugins: false
+  installPlugins: false
 
   admin:
     existingSecret: jenkins-credentials
@@ -13,9 +13,6 @@ controller:
   jenkinsAdminEmail: hello@vrs-factory.dev
 
   resources:
-    requests:
-      cpu: "100m"
-      memory: "1024Mi"
     limits:
       cpu: "500m"
       memory: "2048Mi"
