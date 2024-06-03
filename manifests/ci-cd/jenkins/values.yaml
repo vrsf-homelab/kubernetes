@@ -1,9 +1,9 @@
 controller:
-  image:
-    repository: vertisan/jenkins
-    tag: "1.1.0"
+  # image:
+  #   repository: vertisan/jenkins
+  #   tag: "1.1.0"
 
-  installPlugins: false
+  # installPlugins: false
 
   admin:
     existingSecret: jenkins-credentials
