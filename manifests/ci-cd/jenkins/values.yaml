@@ -12,11 +12,6 @@ controller:
 
   jenkinsAdminEmail: hello@vrs-factory.dev
 
-  resources:
-    limits:
-      cpu: "500m"
-      memory: "2048Mi"
-
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 1
