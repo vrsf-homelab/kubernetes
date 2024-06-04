@@ -55,12 +55,12 @@ agent:
           effect: NoSchedule
 
 additionalAgents:
-  dind:
-    podName: jenkins-agent-dind
-    customJenkinsLabels: dind
+  terraform:
+    podName: jenkins-agent-terraform
+    customJenkinsLabels: terraform
     image:
-      repository: vertisan/dind
-      tag: 26.0-3.19-20240408
+      repository: jenkins/jnlp-agent-terraform
+      tag: latest
 
 persistence:
   size: 20Gi
