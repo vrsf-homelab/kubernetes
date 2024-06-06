@@ -6,7 +6,7 @@ metadata:
 spec:
     acme:
         server: https://acme-v02.api.letsencrypt.org/directory
-        email: ENC[AES256_GCM,data:e2KBbfkUSo7nJ/eUwZsG63IrR4+f,iv:+2wSYM2/Ge01mWB5fPMrRRk+GBb6navDNeovj4mgAQI=,tag:wY+bc154bloZ4N0Fb8xRBw==,type:str]
+        email: ENC[AES256_GCM,data:eIXvaTJOKdgi5r6vSTZ5Tfk3vw4C,iv:fOEavewjF+vAHJtUJt9c9LnnmiEsPmk9FdwCd1dsBGw=,tag:T1GXtd714ujrFdTXfk9YQg==,type:str]
         privateKeySecretRef:
             name: letsencrypt-prod
         solvers:
@@ -18,15 +18,15 @@ spec:
 sops:
     kms:
         - arn: arn:aws:kms:eu-central-1:542006288021:alias/vrsf-homelab-sops
-          created_at: "2024-05-26T21:36:01Z"
-          enc: AQICAHj2f6hX57IyUZVNikxpVJx/MjmH6V3LyiVB5s8g4JDAAAHjZcOJOuL9M5qPdU+55O+sAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMroQW1DQOan3u8kdWAgEQgDvkGeEnLl/wxzt13RccpOroaU+QS41Bk2SQd6xUupzmvt1jqC9Dk6cKsNUxIuEHI9NlchvPSira+W9UEw==
+          created_at: "2024-06-06T23:31:13Z"
+          enc: AQICAHgF6injDvjROWdTFk5WjvFDpdnnijlTWIcGuHq8tjJbNgFzKJ1H8BwpFHzrmBoHIkQDAAAAfjB8BgkqhkiG9w0BBwagbzBtAgEAMGgGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMOyyDitLqDfWuEGHJAgEQgDvHNPl6w6pJ4oVnYy1LEeXYjc/nm3PJAzlQQY8BDhFWRApzWbakr3C/Ms+Qy/Jk0ZvpFgp3Ao8We8FbWg==
           aws_profile: ""
     gcp_kms: []
     azure_kv: []
     hc_vault: []
     age: []
-    lastmodified: "2024-05-26T21:36:02Z"
-    mac: ENC[AES256_GCM,data:cM1t3VT254PQev824aP124DSIP+qnEmMFdFH5beL0lPGPLT1k1WT0uWIaNTJZYUECwT4kpoNFI1hgyaPoiF7y9NSjEjpk4ZW0Zk8l96AKoKzd7eP79/XdQNY380pGb6Egd6k8QEhNZvKxG0re6DY80YXgdFV9qmViKq2flAyc+w=,iv:GBFDHPCLFEVb80vIyjEXmn4HFisvvYqYremEDi2FcMs=,tag:JNURKofUQlfeoX+Ie7XiJA==,type:str]
+    lastmodified: "2024-06-06T23:31:14Z"
+    mac: ENC[AES256_GCM,data:N8D4FGsEzh1LhN1zCnSzK3vAu0EXb5L+zp+6vdCIzOzN2x8kZWHLx/m9t36qqKRJ+pJ4uwdFoaHHARIdUX6+UWUpsMOXB6JgLiTs/F3lMzkug4WsfRI4B+HfyPSvNnYnjAWxV4OjDinljtMIOQg05roz+bSdKeoY6yjPFsVz+1g=,iv:vMhwXJxK0JDJh+3sDG2+ulkTq3iAiUu/4bpOTKVcizs=,tag:UKJJm7ksfZvxKPOSmTrDvA==,type:str]
     pgp: []
     encrypted_regex: ^(data|stringData|email)$
     version: 3.8.1
