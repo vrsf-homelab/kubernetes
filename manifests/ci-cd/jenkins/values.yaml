@@ -40,7 +40,7 @@ controller:
 agent:
   image:
     repository: vertisan/jenkins-agent-generic
-    tag: 20240605212508
+    tag: "20240605212508"
 
   resources:
     requests:
