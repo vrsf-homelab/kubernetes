@@ -1,3 +1,7 @@
+crds:
+  enabled: true
+  keep: true
+
 podDisruptionBudget:
   enabled: true
   minAvailable: 1
