@@ -14,7 +14,11 @@ controller:
 
   podDisruptionBudget:
     enabled: true
+    apiVersion: "policy/v1"
     maxUnavailable: 1
+
+  updateStrategy:
+    type: RollingUpdate
 
   tolerations:
     - key: dedicated
@@ -34,6 +38,10 @@ controller:
           - jenkins.vrsf.in
 
 agent:
+  image:
+    repository: vertisan/jenkins-agent-generic
+    tag: 20240605212508
+
   resources:
     requests:
       cpu: 100m
@@ -54,13 +62,13 @@ agent:
           value: jenkins
           effect: NoSchedule
 
-additionalAgents:
-  terraform:
-    podName: jenkins-agent-terraform
-    customJenkinsLabels: terraform
-    image:
-      repository: jenkins/jnlp-agent-terraform
-      tag: latest
+# additionalAgents:
+#   terraform:
+#     podName: jenkins-agent-terraform
+#     customJenkinsLabels: terraform
+#     image:
+#       repository: jenkins/jnlp-agent-terraform
+#       tag: latest
 
 persistence:
   size: 20Gi
