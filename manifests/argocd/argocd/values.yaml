@@ -69,6 +69,3 @@ redis:
 
 applicationSet:
   metrics: *metricsMonitor
-
-notifications:
-  enabled: false

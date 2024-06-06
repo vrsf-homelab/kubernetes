@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: maintenance
+  namespace: argo-system
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: Tools for homelab maintenance, like descheduler, etc.
+
+  sourceRepos:
+    - "*"
+
+  destinations:
+    - namespace: "*"
+      server: "*"
+
+  clusterResourceWhitelist:
+    - group: "*"
+      kind: "*"
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: &appSetName maintenance
+  namespace: argo-system
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        revision: &revision master
+        directories:
+          - path: "manifests/maintenance/*"
+          - path: "manifests/maintenance/*.disabled"
+            exclude: true
+          - path: "manifests/maintenance/*.standalone"
+            exclude: true
+  syncPolicy:
+    preserveResourcesOnDeletion: false
+  template:
+    metadata:
+      name: "{{ path.basenameNormalized }}"
+      labels:
+        app-group: *appSetName
+    spec:
+      project: *appSetName
+      source:
+        repoURL: git@github.com:vrsf-homelab/kubernetes.git
+        targetRevision: *revision
+        path: "{{ path }}"
+      destination:
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
