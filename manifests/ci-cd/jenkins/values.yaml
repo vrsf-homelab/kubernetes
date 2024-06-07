@@ -60,24 +60,6 @@ agent:
 
   podName: jenkins-agent-generic
 
-  yamlTemplate: |-
-    apiVersion: v1
-    kind: Pod
-    spec:
-      tolerations:
-        - key: dedicated
-          operator: Equal
-          value: jenkins
-          effect: NoSchedule
-
-# additionalAgents:
-#   terraform:
-#     podName: jenkins-agent-terraform
-#     customJenkinsLabels: terraform
-#     image:
-#       repository: jenkins/jnlp-agent-terraform
-#       tag: latest
-
 persistence:
   size: 20Gi
   storageClass: nfs-csi-retain
