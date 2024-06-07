@@ -22,7 +22,7 @@ prometheus:
 
     ### TMP
     nodeSelector:
-      server-type: emerald
+      node.kubernetes.io/server-type: emerald
     ### /TMP
 
   ingress:
