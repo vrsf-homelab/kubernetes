@@ -53,17 +53,13 @@ spec:
       # https://github.com/argoproj/argo-cd/issues/18213
       ignoreDifferences:
         - group: apps
-          kind: Deployment
+          kind: "*"
           jqPathExpressions:
             - ".spec.template.spec.containers[].resources"
         - group: apps
-          kind: StatefulSet
+          kind: "*"
           jqPathExpressions:
-            - ".spec.template.spec.containers[].resources"
-        - group: apps
-          kind: DaemonSet
-          jqPathExpressions:
-            - ".spec.template.spec.containers[].resources"
+            - ".spec.template.spec.initContainers[].resources"
         - group: "admissionregistration.k8s.io/v1"
           kind: ValidatingWebhookConfiguration
           name: prometheus-kube-prometheus-admission
