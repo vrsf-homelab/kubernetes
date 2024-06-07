@@ -20,6 +20,11 @@ prometheus:
             requests:
               storage: 50Gi
 
+    ### TMP
+    nodeSelector:
+      server-type: emerald
+    ### /TMP
+
   ingress:
     enabled: true
     annotations:
