@@ -60,6 +60,28 @@ agent:
 
   podName: jenkins-agent-generic
 
+  yamlTemplate: |-
+    apiVersion: v1
+    kind: Pod
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/worker
+                    operator: In
+                    values:
+                      - "true"
+
+# additionalAgents:
+#   terraform:
+#     podName: jenkins-agent-terraform
+#     customJenkinsLabels: terraform
+#     image:
+#       repository: jenkins/jnlp-agent-terraform
+#       tag: latest
+
 persistence:
   size: 20Gi
   storageClass: nfs-csi-retain
