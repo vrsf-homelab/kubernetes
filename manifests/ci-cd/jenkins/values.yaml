@@ -20,11 +20,19 @@ controller:
   updateStrategy:
     type: RollingUpdate
 
-  tolerations:
-    - key: dedicated
-      operator: Equal
-      value: jenkins
-      effect: NoSchedule
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node.kubernetes.io/server-type
+                operator: In
+                values:
+                  - crimson
+              - key: node-role.kubernetes.io/worker
+                operator: In
+                values:
+                  - "true"
 
   ingress:
     enabled: true
