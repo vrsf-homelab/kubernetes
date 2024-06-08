@@ -3,6 +3,8 @@ kind: AppProject
 metadata:
   name: argocd
   namespace: argo-system
+  annotations:
+    notifications.argoproj.io/subscribe.slack: homelab-argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
