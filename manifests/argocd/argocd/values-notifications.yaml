@@ -1,9 +1,7 @@
 notifications:
   enabled: true
   secret:
-    # create: false # Use already existing secret
-    items:
-      slack-token: xoxb-3160887965236-7245567904771-DxFWObeAvGDm65HmL6LtzZfa
+    create: false # Use already existing secret
 
   notifiers:
     service.slack: |

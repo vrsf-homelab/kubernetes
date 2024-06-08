@@ -10,4 +10,4 @@ metadata:
 files:
   - resources/secret.enc.yaml
   - resources/secret-git-repository.enc.yaml
-  # - resources/secret-notifications.enc.yaml
+  - resources/secret-notifications.enc.yaml
