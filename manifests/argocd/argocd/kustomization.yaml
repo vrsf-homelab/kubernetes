@@ -14,4 +14,6 @@ helmCharts:
     version: 6.11.1 # https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
     namespace: argo-system
     valuesFile: values.yaml
+    additionalValuesFiles:
+      - values-notifications.yaml
     includeCRDs: true
