@@ -24,11 +24,6 @@ prometheus:
             requests:
               storage: 50Gi
 
-    ### TMP
-    nodeSelector:
-      node.kubernetes.io/server-type: emerald
-    ### /TMP
-
   ingress:
     enabled: true
     annotations:
