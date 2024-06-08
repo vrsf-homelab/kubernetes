@@ -28,7 +28,7 @@ spec:
   generators:
     - git:
         repoURL: git@github.com:vrsf-homelab/kubernetes.git
-        revision: &revision master
+        revision: &revision argocd-notifications
         directories:
           - path: "manifests/argocd/*"
           - path: "manifests/argocd/*.disabled"

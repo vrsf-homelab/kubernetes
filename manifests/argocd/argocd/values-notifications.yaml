@@ -8,6 +8,8 @@ notifications:
   notifiers:
     service.slack: |
       token: $slack-token
+      channels:
+        - homelab-argocd
 
   resources:
     limits:
