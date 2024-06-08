@@ -1,6 +1,6 @@
 global:
   domain: argocd.vrsf.in
-  revisionHistoryLimit: 3
+  revisionHistoryLimit: 5
 
   image:
     repository: vertisan/argocd

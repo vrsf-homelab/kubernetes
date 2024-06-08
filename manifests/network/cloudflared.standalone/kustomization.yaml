@@ -1,0 +1,18 @@
+namespace: cloudflared
+
+resources:
+  - resources/namespace.yaml
+  - resources/configmap.yaml
+  - resources/deployment.yaml
+  - resources/pdb.yaml
+
+generators:
+  - generators/sops-generator.yaml
+# helmCharts:
+#   - name: hello-world
+#     repo: https://helm.github.io/examples
+#     version: 0.1.0
+#     releaseName: hello-world
+#     namespace: *namespace
+#     valuesFile: values.yaml
+#     includeCRDs: true
