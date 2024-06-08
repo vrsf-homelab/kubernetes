@@ -42,6 +42,8 @@ spec:
       name: "{{ path.basenameNormalized }}"
       labels:
         app-group: *appSetName
+      annotations:
+        notifications.argoproj.io/subscribe.slack: homelab-argocd
     spec:
       project: *appSetName
       source:

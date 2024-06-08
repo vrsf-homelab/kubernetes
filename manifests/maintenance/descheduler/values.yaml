@@ -1,4 +1,4 @@
-schedule: "0 */3 * * *"
+schedule: "0 */2 * * *"
 
 serviceMonitor:
   enabled: true
