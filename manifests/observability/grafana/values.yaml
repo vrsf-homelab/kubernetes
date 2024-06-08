@@ -64,10 +64,20 @@ dashboardProviders:
         allowUiUpdates: true
         options:
           path: /var/lib/grafana/dashboards/kubernetes
+      - name: "ingress-controller"
+        orgId: 1
+        type: file
+        folder: "Ingress Controller"
+        disableDeletion: false
+        editable: true
+        allowUiUpdates: true
+        options:
+          path: /var/lib/grafana/dashboards/ingress-controller
 dashboardsConfigMaps:
   default: grafana-dashboards-default
   argocd: grafana-dashboards-argocd
   kubernetes: grafana-dashboards-kubernetes
+  ingress-controller: grafana-dashboards-ingress-controller
 
 datasources:
   datasources.yaml:

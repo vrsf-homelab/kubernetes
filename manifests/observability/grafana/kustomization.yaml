@@ -41,3 +41,10 @@ configMapGenerator:
       - configs/dashboards/kubernetes/k8s-general.json
       - configs/dashboards/kubernetes/k8s-nodes.json
       - configs/dashboards/kubernetes/k8s-pods.json
+  - name: grafana-dashboards-nginx-ingress
+    namespace: grafana
+    options:
+      disableNameSuffixHash: true
+    files:
+      - configs/dashboards/ingress-controller/nginx-ingress-controller.json
+      - configs/dashboards/ingress-controller/nginx-ingress-performance.json
