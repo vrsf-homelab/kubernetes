@@ -1,6 +1,7 @@
 notifications:
   enabled: true
-  create: false # Use already existing secret
+  secret:
+    create: false # Use already existing secret
 
   notifiers:
     service.slack: |
