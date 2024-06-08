@@ -1,6 +1,5 @@
 resources:
   - resources/namespace.yaml
-  - resources/job.yaml
 
 namespace: argo-system
 
