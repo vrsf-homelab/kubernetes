@@ -42,6 +42,12 @@ spec:
       name: "{{ path.basenameNormalized }}"
       labels:
         app-group: network
+      annotations:
+        notifications.argoproj.io/subscribe.on-deleted.slack: homelab-argocd
+        notifications.argoproj.io/subscribe.on-health-degraded.slack: homelab-argocd
+        notifications.argoproj.io/subscribe.on-sync-succeeded.slack: homelab-argocd
+        notifications.argoproj.io/subscribe.on-sync-failed.slack: homelab-argocd
+        notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: homelab-argocd
     spec:
       project: network
       source:
