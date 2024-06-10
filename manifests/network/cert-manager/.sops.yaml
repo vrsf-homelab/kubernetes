@@ -1,3 +1,0 @@
-creation_rules:
-  - encrypted_regex: "^(data|stringData|email)$"
-    kms: arn:aws:kms:eu-central-1:542006288021:alias/vrsf-homelab-sops
