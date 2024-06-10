@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace promtail
+
+helmCharts:
+  - name: promtail
+    repo: https://grafana.github.io/helm-charts
+    version: 6.16.0
+    releaseName: promtail
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true

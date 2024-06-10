@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace loki
+
+helmCharts:
+  - name: loki
+    repo: https://grafana.github.io/helm-charts
+    version: 6.6.3
+    releaseName: loki
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true

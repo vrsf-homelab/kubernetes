@@ -1,0 +1,26 @@
+service:
+  labels:
+    a: a # TODO: Investigate why cannot build `service`/`serviceMonitor` without any labels
+
+serviceMonitor:
+  enabled: true
+  labels:
+    release: prometheus
+
+config:
+  logFormat: json
+  clients:
+    - url: http://loki-gateway.loki.svc.cluster.local/loki/api/v1/push
+      tenant_id: 1
+
+  snippets:
+    pipelineStages:
+      - labeldrop:
+          - filename
+
+configmap:
+  enabled: true # Just for now
+
+sidecar:
+  configReloader:
+    enabled: true
