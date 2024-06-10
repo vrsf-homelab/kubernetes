@@ -1,0 +1,30 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: grafana
+  namespace: &ns argo-system
+  labels:
+    argocd.argoproj.io/group: observability
+    argocd.argoproj.io/managed-by: application
+  annotations:
+    notifications.argoproj.io/subscribe.on-deleted.slack: homelab-argocd
+    notifications.argoproj.io/subscribe.on-health-degraded.slack: homelab-argocd
+    notifications.argoproj.io/subscribe.on-sync-succeeded.slack: homelab-argocd
+    notifications.argoproj.io/subscribe.on-sync-failed.slack: homelab-argocd
+    notifications.argoproj.io/subscribe.on-sync-status-unknown.slack: homelab-argocd
+spec:
+  project: observability
+  source:
+    repoURL: git@github.com:vrsf-homelab/kubernetes.git
+    targetRevision: master
+    path: manifests/observability/grafana
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: *ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
