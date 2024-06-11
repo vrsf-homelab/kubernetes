@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace vault-system
+
+helmCharts:
+  - name: vault
+    repo: https://helm.releases.hashicorp.com
+    version: 0.28.0
+    releaseName: vault
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
