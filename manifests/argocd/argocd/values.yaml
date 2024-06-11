@@ -32,8 +32,11 @@ configs:
 
 controller:
   resources:
-    limits:
+    requests:
       cpu: 500m
+      memory: 768Mi
+    limits:
+      cpu: 1500m
       memory: 2Gi
   pdb:
     minAvailable: 1
