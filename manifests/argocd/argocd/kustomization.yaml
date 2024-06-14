@@ -1,6 +1,5 @@
 resources:
   - resources/namespace.yaml
-  - resources/servicemonitor.yaml
 
 namespace: argo-system
 
