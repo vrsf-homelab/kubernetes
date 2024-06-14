@@ -16,3 +16,5 @@ helmCharts:
     additionalValuesFiles:
       - values-notifications.yaml
     includeCRDs: true
+    apiVersions:
+      - monitoring.coreos.com/v1
