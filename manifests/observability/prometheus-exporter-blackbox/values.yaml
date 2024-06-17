@@ -1,3 +1,6 @@
+podDisruptionBudget:
+  maxUnavailable: 0
+
 serviceMonitor:
   enabled: true
   defaults:

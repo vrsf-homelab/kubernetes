@@ -4,7 +4,7 @@ grafana:
 prometheus:
   podDisruptionBudget:
     enabled: true
-    minAvailable: 1
+    maxUnavailable: 0
   prometheusSpec:
     retention: 14d
     resources:
@@ -43,21 +43,6 @@ kube-state-metrics:
     - nodes=[*]
     - namespaces=[*]
     - pods=[*]
-
-# kubeApiServer:
-#   enabled: false
-
-# kubeScheduler:
-#   enabled: false
-
-# kubeEtcd:
-#   enabled: false
-
-# coreDns:
-#   enabled: false
-
-# kubeControllerManager:
-#   enabled: false
 
 alertmanager:
   enabled: false
