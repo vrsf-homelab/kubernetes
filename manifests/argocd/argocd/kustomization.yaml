@@ -10,9 +10,11 @@ helmCharts:
   - name: argo-cd
     releaseName: argo-cd
     repo: https://argoproj.github.io/argo-helm
-    version: 6.11.1 # https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
+    version: 7.1.3 # https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
     namespace: argo-system
     valuesFile: values.yaml
     additionalValuesFiles:
       - values-notifications.yaml
     includeCRDs: true
+    apiVersions:
+      - monitoring.coreos.com/v1

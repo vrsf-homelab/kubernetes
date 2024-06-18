@@ -5,3 +5,7 @@ controller:
       enabled: true
       additionalLabels:
         release: prometheus
+
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 0

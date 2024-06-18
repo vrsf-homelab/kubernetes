@@ -4,7 +4,7 @@ global:
 
   image:
     repository: vertisan/argocd
-    tag: 2.11.2-custom.0
+    tag: 2.11.3-custom.0
 
   logging:
     format: json
@@ -13,7 +13,7 @@ global:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
-      maxUnavailable: 25%
+      maxUnavailable: 0
 
 crds:
   install: true
@@ -39,7 +39,7 @@ controller:
       cpu: 1500m
       memory: 2Gi
   pdb:
-    minAvailable: 1
+    maxUnavailable: 0
   metrics: &metricsMonitor
     enabled: true
     serviceMonitor:
