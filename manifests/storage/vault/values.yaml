@@ -5,6 +5,9 @@ global:
 injector:
   enabled: true
 
+ui:
+  enabled: true
+
 server:
   extraEnvironmentVars:
     VAULT_CACERT: /vault/userconfig/vault-ha-tls/vault.ca

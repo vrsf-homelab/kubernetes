@@ -29,6 +29,7 @@ subjectAltName = @alt_names
 DNS.1 = *.${VAULT_SERVICE_NAME}
 DNS.2 = *.${VAULT_SERVICE_NAME}.${VAULT_K8S_NAMESPACE}.svc.${K8S_CLUSTER_NAME}
 DNS.3 = *.${VAULT_K8S_NAMESPACE}
+DNS.4 = vault.vrsf.in
 IP.1 = 127.0.0.1
 EOF
 
@@ -65,6 +66,8 @@ kubectl create secret generic vault-ha-tls -n $VAULT_K8S_NAMESPACE --from-file=v
 Setup cluster
 
 ```shell
+kustomize build --enable-helm --enable-alpha-plugins --enable-exec . | kubectl apply -f -
+
 kubectl exec -n $VAULT_K8S_NAMESPACE vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > ${WORKDIR}/cluster-keys.json
 
 VAULT_UNSEAL_KEY=$(jq -r ".unseal_keys_b64[]" ${WORKDIR}/cluster-keys.json)
