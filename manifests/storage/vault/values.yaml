@@ -1,6 +1,8 @@
 global:
   enabled: true
   tlsDisable: false
+  serverTelemetry:
+    prometheusOperator: true
 
 injector:
   enabled: true
@@ -37,6 +39,7 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: "letsencrypt-prod"
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     tls:
       - secretName: vault-tls
         hosts:
@@ -61,6 +64,10 @@ server:
            tls_cert_file = "/vault/userconfig/vault-ha-tls/vault.crt"
            tls_key_file  = "/vault/userconfig/vault-ha-tls/vault.key"
            tls_client_ca_file = "/vault/userconfig/vault-ha-tls/vault.ca"
+
+            telemetry {
+              unauthenticated_metrics_access = "true"
+            }
         }
         storage "raft" {
            path = "/vault/data"
@@ -95,3 +102,7 @@ server:
         }
         disable_mlock = true
         service_registration "kubernetes" {}
+
+serverTelemetry:
+  serviceMonitor:
+    enabled: true
