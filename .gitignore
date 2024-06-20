@@ -2,6 +2,7 @@
 secret*.y*ml
 !secret*.enc.y*ml
 cluster-issuer.yaml
+README.secret.md
 
 ## Temp
 repositories/
