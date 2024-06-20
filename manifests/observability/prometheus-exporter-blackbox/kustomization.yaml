@@ -8,3 +8,5 @@ helmCharts:
     namespace: *namespace
     valuesFile: values.yaml
     includeCRDs: true
+    apiVersions:
+      - policy/v1/PodDisruptionBudget
