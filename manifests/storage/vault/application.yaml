@@ -17,7 +17,7 @@ spec:
   project: storage
   source:
     repoURL: git@github.com:vrsf-homelab/kubernetes.git
-    targetRevision: vault
+    targetRevision: master
     path: manifests/storage/vault
   destination:
     server: https://kubernetes.default.svc

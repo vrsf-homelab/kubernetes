@@ -29,7 +29,8 @@ subjectAltName = @alt_names
 DNS.1 = *.${VAULT_SERVICE_NAME}
 DNS.2 = *.${VAULT_SERVICE_NAME}.${VAULT_K8S_NAMESPACE}.svc.${K8S_CLUSTER_NAME}
 DNS.3 = *.${VAULT_K8S_NAMESPACE}
-DNS.4 = vault.vrsf.in
+DNS.4 = *.${VAULT_SERVICE_NAME}.svc
+DNS.5 = vault.vrsf.in
 IP.1 = 127.0.0.1
 EOF
 
