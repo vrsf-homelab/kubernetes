@@ -1,5 +1,7 @@
 resources:
   - resources/namespace.yaml
+  - resources/role.yaml
+  - resources/role-binding.yaml
 
 namespace: &namespace jenkins
 
