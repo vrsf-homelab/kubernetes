@@ -1,11 +1,7 @@
+path "auth/approle/role/jenkins-role/secret-id" {
+  capabilities = ["read", "create", "update"]
+}
+
 path "jenkins/*" {
-  capabilities = ["read"]
-}
-
-path "jenkins-v1/*" {
-  capabilities = ["read"]
-}
-
-path "secrets/creds/*" {
   capabilities = ["read"]
 }
