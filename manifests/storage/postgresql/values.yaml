@@ -4,12 +4,6 @@ global:
 postgresql:
   replicaCount: 3
 
-  updateStrategy:
-    type: RollingUpdate
-
-    rollingUpdate:
-      maxUnavailable: 25%
-
   resources:
     requests:
       cpu: 100m
