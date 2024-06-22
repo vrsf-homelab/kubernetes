@@ -1,0 +1,30 @@
+global:
+  storageClass: nfs-csi-retain
+
+postgresql:
+  replicaCount: 3
+
+  updateStrategy:
+    type: RollingUpdate
+
+    rollingUpdate:
+      maxUnavailable: 25%
+
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 1024Mi
+
+rbac:
+  create: true
+
+metrics:
+  enabled: true
+
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: prometheus
