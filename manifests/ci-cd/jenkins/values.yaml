@@ -1,9 +1,3 @@
-master:
-  prometheus:
-    enabled: true
-    serviceMonitorAdditionalLabels:
-      release: prometheus
-
 controller:
   image:
     repository: vertisan/jenkins
@@ -50,6 +44,11 @@ controller:
       - secretName: jenkins-tls
         hosts:
           - jenkins.vrsf.in
+
+  prometheus:
+    enabled: true
+    serviceMonitorAdditionalLabels:
+      release: prometheus
 
 agent:
   image:
