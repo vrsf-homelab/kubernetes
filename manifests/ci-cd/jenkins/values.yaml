@@ -1,3 +1,9 @@
+master:
+  prometheus:
+    enabled: true
+    serviceMonitorAdditionalLabels:
+      release: prometheus
+
 controller:
   image:
     repository: vertisan/jenkins
