@@ -20,3 +20,11 @@ webhook:
 cainjector:
   extraArgs:
     - --logging-format=json
+
+prometheus:
+  enabled: true
+
+  servicemonitor:
+    enabled: true
+    labels:
+      release: prometheus

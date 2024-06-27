@@ -12,9 +12,9 @@ data:
     metrics: 0.0.0.0:2000
     no-autoupdate: true
     ingress:
-    - hostname: "jenkins.vrsf.in"
+    - hostname: "grafana.vrsf.in"
       service: https://nginx-ingress-ingress-nginx-controller.ingress-controller.svc.cluster.local:443
       originRequest:
-        httpHostHeader: jenkins.vrsf.in
+        httpHostHeader: grafana.vrsf.in
         noTLSVerify: true
     - service: http_status:404
