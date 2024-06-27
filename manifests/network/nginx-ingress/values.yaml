@@ -9,3 +9,14 @@ controller:
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 0
+
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+          matchExpressions:
+            - key: node.kubernetes.io/server-type
+              operator: In
+              values:
+                - crimson
