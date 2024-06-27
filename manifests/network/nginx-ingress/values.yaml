@@ -15,8 +15,8 @@ controller:
       preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 1
           preference:
-          matchExpressions:
-            - key: node.kubernetes.io/server-type
-              operator: In
-              values:
-                - crimson
+            matchExpressions:
+              - key: node.kubernetes.io/server-type
+                operator: In
+                values:
+                  - crimson
