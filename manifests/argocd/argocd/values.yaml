@@ -15,6 +15,15 @@ global:
       maxSurge: 25%
       maxUnavailable: 0
 
+  affinity:
+    nodeAffinity:
+      type: hard
+      matchExpressions:
+        - key: node.kubernetes.io/server-type
+          operator: In
+          values:
+            - crimson
+
 crds:
   install: true
   keep: false
@@ -69,14 +78,6 @@ server:
   pdb:
     enabled: true
     maxUnavailable: 0
-  affinity:
-    nodeAffinity:
-      type: soft
-      matchExpressions:
-        - key: node.kubernetes.io/server-type
-          operator: In
-          values:
-            - crimson
 
 redis:
   metrics: *metricsMonitor
