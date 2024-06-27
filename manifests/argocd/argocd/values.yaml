@@ -66,6 +66,17 @@ server:
       nginx.ingress.kubernetes.io/ssl-passthrough: "true"
       nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
     tls: true
+  pdb:
+    enabled: true
+    maxUnavailable: 0
+  affinity:
+    nodeAffinity:
+      type: soft
+      matchExpressions:
+        - key: node.kubernetes.io/server-type
+          operator: In
+          values:
+            - crimson
 
 redis:
   metrics: *metricsMonitor
