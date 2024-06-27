@@ -26,6 +26,7 @@ configMapGenerator:
       - configs/dashboards/default/mikrotik-general.json
       - configs/dashboards/default/proxmox-general.json
       - configs/dashboards/default/redis.json
+      - configs/dashboards/default/cert-manager.json
   - name: grafana-dashboards-argocd
     namespace: grafana
     options:
