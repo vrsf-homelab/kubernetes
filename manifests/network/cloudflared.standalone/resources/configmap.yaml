@@ -17,4 +17,9 @@ data:
       originRequest:
         httpHostHeader: grafana.vrsf.in
         noTLSVerify: true
+    - hostname: "jenkins.vrsf.in"
+      service: https://nginx-ingress-ingress-nginx-controller.ingress-controller.svc.cluster.local:443
+      originRequest:
+        httpHostHeader: jenkins.vrsf.in
+        noTLSVerify: true
     - service: http_status:404
