@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: arc-controller
+  namespace: &ns argo-system
+  labels:
+    argocd.argoproj.io/group: ci-cd
+    argocd.argoproj.io/stack: github-actions
+    argocd.argoproj.io/managed-by: application
+spec:
+  project: ci-cd
+  source:
+    repoURL: git@github.com:vrsf-homelab/kubernetes.git
+    targetRevision: master
+    path: manifests/ci-cd/github-actions/arc-controller
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: *ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
