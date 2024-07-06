@@ -17,7 +17,6 @@ generators:
 
 configMapGenerator:
   - name: grafana-dashboards-default
-    namespace: grafana
     options:
       disableNameSuffixHash: true
     files:
@@ -27,26 +26,38 @@ configMapGenerator:
       - configs/dashboards/default/proxmox-general.json
       - configs/dashboards/default/redis.json
       - configs/dashboards/default/cert-manager.json
+
   - name: grafana-dashboards-argocd
-    namespace: grafana
     options:
       disableNameSuffixHash: true
     files:
       - configs/dashboards/argocd/argocd-general.json
       - configs/dashboards/argocd/argocd-application-overview.json
       - configs/dashboards/argocd/argocd-operational-overview.json
+
   - name: grafana-dashboards-kubernetes
-    namespace: grafana
     options:
       disableNameSuffixHash: true
     files:
       - configs/dashboards/kubernetes/k8s-general.json
       - configs/dashboards/kubernetes/k8s-nodes.json
       - configs/dashboards/kubernetes/k8s-pods.json
+
   - name: grafana-dashboards-ingress-controller
-    namespace: grafana
     options:
       disableNameSuffixHash: true
     files:
       - configs/dashboards/ingress-controller/nginx-ingress-controller.json
       - configs/dashboards/ingress-controller/nginx-ingress-performance.json
+
+  - name: grafana-dashboards-istio
+    options:
+      disableNameSuffixHash: true
+    files:
+      - configs/dashboards/istio/istio-control-plane.json
+      - configs/dashboards/istio/istio-mesh.json
+      - configs/dashboards/istio/istio-performance.json
+      - configs/dashboards/istio/istio-service.json
+      - configs/dashboards/istio/istio-wasm-extension.json
+      - configs/dashboards/istio/istio-workload.json
+      - configs/dashboards/istio/istio-ztunnel.json
