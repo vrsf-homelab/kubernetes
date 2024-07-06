@@ -87,7 +87,7 @@ dashboardsConfigMaps:
   argocd: grafana-dashboards-argocd
   kubernetes: grafana-dashboards-kubernetes
   ingress-controller: grafana-dashboards-ingress-controller
-  istio: grafana-dashboards-ingress-controller
+  istio: grafana-dashboards-istio
 
 datasources:
   datasources.yaml:
