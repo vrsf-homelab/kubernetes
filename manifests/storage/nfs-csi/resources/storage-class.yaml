@@ -7,7 +7,7 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "true"
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 10.69.20.1
+  server: 10.0.20.30
   share: /volume1/k8s-cluster
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
@@ -24,7 +24,7 @@ metadata:
     storageclass.kubernetes.io/is-default-class: "false"
 provisioner: nfs.csi.k8s.io
 parameters:
-  server: 10.69.20.1
+  server: 10.0.20.30
   share: /volume1/k8s-cluster
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer

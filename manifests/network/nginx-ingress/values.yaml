@@ -6,6 +6,10 @@ controller:
       additionalLabels:
         release: prometheus
 
+  service:
+    annotations:
+      metallb.universe.tf/loadBalancerIPs: 10.0.30.21
+
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 0
@@ -16,7 +20,5 @@ controller:
         - weight: 1
           preference:
             matchExpressions:
-              - key: node.kubernetes.io/server-type
-                operator: In
-                values:
-                  - crimson
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists

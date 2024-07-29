@@ -11,3 +11,4 @@ helmCharts:
     releaseName: csi-driver-nfs
     namespace: nfs-csi-system
     includeCRDs: true
+# TODO: Add patch to disable 'local-path' as default
