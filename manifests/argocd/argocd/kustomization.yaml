@@ -10,7 +10,7 @@ helmCharts:
   - name: argo-cd
     releaseName: argo-cd
     repo: https://argoproj.github.io/argo-helm
-    version: 7.3.11 # https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
+    version: 7.1.3 # https://artifacthub.io/packages/helm/argo/argo-cd?modal=changelog
     namespace: argo-system
     valuesFile: values.yaml
     additionalValuesFiles:
