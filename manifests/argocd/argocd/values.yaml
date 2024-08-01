@@ -17,12 +17,11 @@ global:
 
   affinity:
     nodeAffinity:
-      type: hard
-      matchExpressions:
-        - key: node.kubernetes.io/server-type
-          operator: In
-          values:
-            - crimson
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: Exists
 
 crds:
   install: true
