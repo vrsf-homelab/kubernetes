@@ -1,0 +1,14 @@
+# TODO: Separate runners from controller
+namespace: &namespace arc-runners
+
+generators:
+  - generators/sops-generator.yaml
+
+helmCharts:
+  - releaseName: arc-runner-personal
+    name: gha-runner-scale-set
+    version: 0.9.3
+    repo: oci://ghcr.io/actions/actions-runner-controller-charts
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true

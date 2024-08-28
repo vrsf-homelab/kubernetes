@@ -1,0 +1,28 @@
+githubConfigUrl: https://github.com/vertisan/vault-snapshot-agent
+githubConfigSecret: arc-gha-runner-personal
+
+runnerScaleSetName: personal
+
+minRunners: 1
+maxRunners: 3
+
+containerMode:
+  type: dind
+
+template:
+  spec:
+    containers:
+      - name: runner
+        image: ghcr.io/actions/actions-runner:latest
+        command: ["/home/runner/run.sh"]
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: node-role.kubernetes.io/control-plane
+                  operator: DoesNotExist
+
+controllerServiceAccount:
+  name: arc-gha-rs-controller
+  namespace: arc-runners
