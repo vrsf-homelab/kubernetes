@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: arc-runner
+  name: arc-runner-homelab
   namespace: &ns argo-system
   labels:
     argocd.argoproj.io/group: ci-cd
@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: git@github.com:vrsf-homelab/kubernetes.git
     targetRevision: master
-    path: manifests/ci-cd/github-actions/arc-runner
+    path: manifests/ci-cd/github-actions/arc-runner-homelab
   destination:
     server: https://kubernetes.default.svc
     namespace: *ns
