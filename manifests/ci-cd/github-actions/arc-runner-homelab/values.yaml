@@ -1,5 +1,5 @@
 githubConfigUrl: https://github.com/vrsf-homelab
-githubConfigSecret: arc-gha-runner
+githubConfigSecret: arc-gha-runner-homelab
 
 runnerScaleSetName: homelab
 
