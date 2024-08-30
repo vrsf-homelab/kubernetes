@@ -13,7 +13,7 @@ template:
   spec:
     containers:
       - name: runner
-        image: ghcr.io/actions/actions-runner:latest
+        image: vertisan/github-actions-runner:0.1.0
         command: ["/home/runner/run.sh"]
     affinity:
       nodeAffinity:
