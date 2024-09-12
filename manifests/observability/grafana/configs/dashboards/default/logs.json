@@ -159,8 +159,8 @@
             "type": "loki",
             "uid": "ddxl2zug16xhcb"
           },
-          "editorMode": "code",
-          "expr": "{service_name=\"systemd-journal\", unit=\"vault-snapshot-agent.service\"} | regexp `^(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}) (?P<level>[A-Z]+) (?P<message>.*)$`",
+          "editorMode": "builder",
+          "expr": "{service_name=\"systemd-journal\", unit=\"vault-snapshot-agent.service\", hostname=~\"$hostname\"} | regexp `^(?P<timestamp>\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}) (?P<level>[A-Z]+) (?P<message>.*)$`",
           "queryType": "range",
           "refId": "A"
         }
@@ -227,7 +227,7 @@
             "sort": [
               {
                 "desc": true,
-                "field": "timestamp"
+                "field": "Time"
               }
             ]
           }
@@ -239,7 +239,46 @@
   "schemaVersion": 39,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": "All",
+        "current": {
+          "selected": true,
+          "text": [
+            "core-1-ip-10-0-31-11",
+            "core-2-ip-10-0-31-12",
+            "core-3-ip-10-0-31-13"
+          ],
+          "value": [
+            "core-1-ip-10-0-31-11",
+            "core-2-ip-10-0-31-12",
+            "core-3-ip-10-0-31-13"
+          ]
+        },
+        "datasource": {
+          "type": "loki",
+          "uid": "ddxl2zug16xhcb"
+        },
+        "definition": "",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Hostname",
+        "multi": true,
+        "name": "hostname",
+        "options": [],
+        "query": {
+          "label": "hostname",
+          "refId": "LokiVariableQueryEditor-VariableQuery",
+          "stream": "",
+          "type": 1
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -250,6 +289,6 @@
   "timezone": "browser",
   "title": "Logs",
   "uid": "fdxozopnip14wf",
-  "version": 1,
+  "version": 4,
   "weekStart": ""
 }
