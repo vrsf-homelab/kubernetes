@@ -7,7 +7,7 @@ singleBinary:
 
   persistence:
     storageClass: nfs-csi
-    size: 10Gi
+    size: 20Gi
 
 loki:
   auth_enabled: false
@@ -31,18 +31,35 @@ backend:
 write:
   replicas: 0
 
-ingress:
-  enabled: true
-  ingressClassName: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-  hosts:
-    - loki.vrsf.in
-  tls:
-    - secretName: loki-tls
-      hosts:
-        - loki.vrsf.in
+gateway:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    hosts:
+      - host: loki-gw.vrsf.in
+        paths:
+          - path: /
+            pathType: Prefix
+    tls:
+      - secretName: loki-gw-tls
+        hosts:
+          - loki-gw.vrsf.in
+
+# ingress:
+#   enabled: true
+#   ingressClassName: nginx
+#   annotations:
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+#   hosts:
+#     - loki.vrsf.in
+#   tls:
+#     - secretName: loki-tls
+#       hosts:
+#         - loki.vrsf.in
 
 chunksCache:
   allocatedMemory: 2048
