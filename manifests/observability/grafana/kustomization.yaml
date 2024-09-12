@@ -26,6 +26,7 @@ configMapGenerator:
       - configs/dashboards/default/proxmox-general.json
       - configs/dashboards/default/redis.json
       - configs/dashboards/default/cert-manager.json
+      - configs/dashboards/default/logs.json
 
   - name: grafana-dashboards-argocd
     options:
