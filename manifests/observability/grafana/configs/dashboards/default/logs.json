@@ -22,6 +22,19 @@
   "links": [],
   "panels": [
     {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "panels": [],
+      "title": "CORE",
+      "type": "row"
+    },
+    {
       "datasource": {
         "type": "loki",
         "uid": "ddxl2zug16xhcb"
@@ -82,7 +95,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 250
+                "value": 220
               }
             ]
           },
@@ -135,11 +148,12 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 24,
+        "w": 12,
         "x": 0,
-        "y": 0
+        "y": 1
       },
       "id": 1,
+      "maxPerRow": 2,
       "options": {
         "cellHeight": "sm",
         "footer": {
@@ -153,6 +167,8 @@
         "showHeader": true
       },
       "pluginVersion": "11.0.0",
+      "repeat": "hostname",
+      "repeatDirection": "h",
       "targets": [
         {
           "datasource": {
@@ -165,7 +181,7 @@
           "refId": "A"
         }
       ],
-      "title": "Logs preview",
+      "title": "$hostname",
       "transformations": [
         {
           "id": "extractFields",
@@ -181,6 +197,7 @@
               "Line": true,
               "Time": true,
               "detected_level": true,
+              "hostname": true,
               "id": true,
               "job": true,
               "labelTypes": true,
@@ -289,6 +306,6 @@
   "timezone": "browser",
   "title": "Logs",
   "uid": "fdxozopnip14wf",
-  "version": 4,
+  "version": 10,
   "weekStart": ""
 }
