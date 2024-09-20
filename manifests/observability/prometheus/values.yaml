@@ -6,7 +6,8 @@ prometheus:
     enabled: true
     maxUnavailable: 0
   prometheusSpec:
-    retention: 14d
+    replicas: 2
+    retention: 30d
     resources:
       requests:
         cpu: 250m
