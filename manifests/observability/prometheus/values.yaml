@@ -5,9 +5,11 @@ prometheus:
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 0
+
   prometheusSpec:
     replicas: 2
     retention: 30d
+
     resources:
       requests:
         cpu: 250m
@@ -15,6 +17,7 @@ prometheus:
       limits:
         cpu: 1500m
         memory: 3072Mi
+
     storageSpec:
       volumeClaimTemplate:
         spec:
@@ -23,6 +26,9 @@ prometheus:
           resources:
             requests:
               storage: 50Gi
+
+    podAntiAffinity: hard
+    podAntiAffinityTopologyKey: node.kubernetes.io/proxmox-node
 
   ingress:
     enabled: true
