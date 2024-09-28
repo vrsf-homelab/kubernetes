@@ -1,7 +1,7 @@
 deploymentMode: SingleBinary
 
 singleBinary:
-  replicas: 1
+  replicas: 1 # SingleBinary cannot be scaled more than 1
   autoscaling:
     enabled: true
 
@@ -9,10 +9,28 @@ singleBinary:
     storageClass: nfs-csi
     size: 20Gi
 
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: single-binary
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: single-binary
+          topologyKey: node.kubernetes.io/proxmox-node
+
 loki:
   auth_enabled: false
   commonConfig:
-    replication_factor: 1
+    replication_factor: 2
   storage:
     type: "filesystem"
   schemaConfig:
@@ -32,6 +50,7 @@ write:
   replicas: 0
 
 gateway:
+  replicas: 2
   ingress:
     enabled: true
     ingressClassName: nginx
@@ -48,18 +67,23 @@ gateway:
         hosts:
           - loki-gw.vrsf.in
 
-# ingress:
-#   enabled: true
-#   ingressClassName: nginx
-#   annotations:
-#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-#     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-#   hosts:
-#     - loki.vrsf.in
-#   tls:
-#     - secretName: loki-tls
-#       hosts:
-#         - loki.vrsf.in
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/component: gateway
+          topologyKey: node.kubernetes.io/proxmox-node
 
 chunksCache:
   allocatedMemory: 2048

@@ -6,7 +6,7 @@ metadata:
   labels:
     cloudflared-tunnel: cloudflared-homelab
 spec:
-  minAvailable: 1
+  maxUnavailable: 50%
   selector:
     matchLabels:
       app: cloudflared-controller
