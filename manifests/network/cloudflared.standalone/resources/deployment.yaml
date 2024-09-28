@@ -7,7 +7,7 @@ spec:
   selector:
     matchLabels:
       app: cloudflared-controller
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
@@ -55,3 +55,20 @@ spec:
             items:
               - key: config.yaml
                 path: config.yaml
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: single-binary
+              topologyKey: kubernetes.io/hostname
+            - labelSelector:
+                matchLabels:
+                  app.kubernetes.io/component: single-binary
+              topologyKey: node.kubernetes.io/proxmox-node
