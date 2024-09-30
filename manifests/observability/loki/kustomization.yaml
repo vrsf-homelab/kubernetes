@@ -1,6 +1,6 @@
 resources:
   - resources/namespace.yaml
-  - resources/pod-distruption-budget.yaml
+  - resources/pdb.yaml
 
 namespace: &namespace loki
 
