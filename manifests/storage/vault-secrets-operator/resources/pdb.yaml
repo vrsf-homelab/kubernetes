@@ -1,0 +1,11 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: vault-secrets-operator
+spec:
+  maxUnavailable: 50%
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+      app.kubernetes.io/instance: vault-secrets-operator
+      app.kubernetes.io/name: vault-secrets-operator

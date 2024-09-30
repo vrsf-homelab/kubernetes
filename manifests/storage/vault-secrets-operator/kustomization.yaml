@@ -1,13 +1,14 @@
 resources:
   - resources/namespace.yaml
+  - resources/pdb.yaml
 
 namespace: &namespace vault-system
 
 helmCharts:
-  - name: vault
+  - name: vault-secrets-operator
     repo: https://helm.releases.hashicorp.com
-    version: 0.28.0
-    releaseName: vault
+    version: 0.8.1
+    releaseName: vault-secrets-operator
     namespace: *namespace
     valuesFile: values.yaml
     includeCRDs: true

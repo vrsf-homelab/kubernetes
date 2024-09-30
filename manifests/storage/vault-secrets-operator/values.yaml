@@ -1,0 +1,39 @@
+controller:
+  replicas: 2
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: node-role.kubernetes.io/control-plane
+                operator: DoesNotExist
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: vault-secrets-operator
+              app.kubernetes.io/instance: vault-secrets-operator
+          topologyKey: kubernetes.io/hostname
+        - labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: vault-secrets-operator
+              app.kubernetes.io/instance: vault-secrets-operator
+          topologyKey: node.kubernetes.io/proxmox-node
+
+  manager:
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+
+defaultVaultConnection:
+  enabled: true
+  address: "https://vlt.vrsf.in:8200"
+  skipTLSVerify: true # Disable after resolving "unknown authority"
+
+telemetry:
+  serviceMonitor:
+    enabled: true
+    selectors:
+      release: prometheus
