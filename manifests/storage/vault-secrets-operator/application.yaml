@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-operator
+  name: vault-secrets-operator
   namespace: &ns argo-system
   labels:
     argocd.argoproj.io/group: storage
@@ -18,7 +18,7 @@ spec:
   source:
     repoURL: git@github.com:vrsf-homelab/kubernetes.git
     targetRevision: master
-    path: manifests/storage/vault-operator
+    path: manifests/storage/vault-secrets-operator
   destination:
     server: https://kubernetes.default.svc
     namespace: *ns
