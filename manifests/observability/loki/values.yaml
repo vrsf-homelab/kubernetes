@@ -17,15 +17,13 @@ singleBinary:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: single-binary
-          topologyKey: kubernetes.io/hostname
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: single-binary
-          topologyKey: node.kubernetes.io/proxmox-node
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app: example-app
+            topologyKey: kubernetes.io/hostname
 
 loki:
   auth_enabled: false
@@ -75,15 +73,22 @@ gateway:
               - key: node-role.kubernetes.io/control-plane
                 operator: DoesNotExist
     podAntiAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: gateway
-          topologyKey: kubernetes.io/hostname
-        - labelSelector:
-            matchLabels:
-              app.kubernetes.io/component: gateway
-          topologyKey: node.kubernetes.io/proxmox-node
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          podAffinityTerm:
+            labelSelector:
+              matchLabels:
+                app.kubernetes.io/component: gateway
+                app.kubernetes.io/name: loki
+            topologyKey: kubernetes.io/hostname
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/component: gateway
+          app.kubernetes.io/name: loki
 
 chunksCache:
   allocatedMemory: 2048
