@@ -27,8 +27,16 @@ prometheus:
             requests:
               storage: 50Gi
 
-    podAntiAffinity: hard
-    podAntiAffinityTopologyKey: node.kubernetes.io/proxmox-node
+    podAntiAffinity: soft
+    podAntiAffinityTopologyKey: kubernetes.io/hostname
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: prometheus
+            app.kubernetes.io/instance: prometheus-kube-prometheus-prometheus
 
   ingress:
     enabled: true
