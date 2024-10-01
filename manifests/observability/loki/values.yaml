@@ -79,7 +79,6 @@ gateway:
             labelSelector:
               matchLabels:
                 app.kubernetes.io/component: gateway
-                app.kubernetes.io/name: loki
             topologyKey: kubernetes.io/hostname
   topologySpreadConstraints:
     - maxSkew: 1
@@ -88,7 +87,6 @@ gateway:
       labelSelector:
         matchLabels:
           app.kubernetes.io/component: gateway
-          app.kubernetes.io/name: loki
 
 chunksCache:
   allocatedMemory: 2048
