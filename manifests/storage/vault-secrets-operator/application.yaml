@@ -22,12 +22,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: *ns
-  # ignoreDifferences:
-  #   - group: "admissionregistration.k8s.io/v1"
-  #     kind: ValidatingWebhookConfiguration
-  #     name: vault-agent-injector-cfg
-  #     jsonPointers:
-  #       - ".webhooks[].clientConfig.caBundle"
   syncPolicy:
     automated:
       prune: true
