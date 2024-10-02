@@ -1,3 +1,7 @@
+resources:
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
+
 namespace: &namespace prometheus-exporter
 
 helmCharts:
@@ -7,6 +11,3 @@ helmCharts:
     releaseName: prometheus-mikrotik-exporter
     namespace: *namespace
     valuesFile: values.yaml
-
-generators:
-  - generators/sops-generator.yaml
