@@ -2,16 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflared-controller
-  namespace: cloudflared
+  labels:
+    app.kubernetes.io/name: cloudflared
+    app.kubernetes.io/component: controller
 spec:
   selector:
     matchLabels:
-      app: cloudflared-controller
+      app.kubernetes.io/name: cloudflared
+      app.kubernetes.io/component: controller
   replicas: 2
   template:
     metadata:
       labels:
-        app: cloudflared-controller
+        app.kubernetes.io/name: cloudflared
+        app.kubernetes.io/component: controller
     spec:
       containers:
         - name: controller
@@ -61,14 +65,19 @@ spec:
             nodeSelectorTerms:
               - matchExpressions:
                   - key: node-role.kubernetes.io/control-plane
-                    operator: DoesNotExist
+                    operator: Exists
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             - labelSelector:
                 matchLabels:
-                  app.kubernetes.io/component: single-binary
+                  app.kubernetes.io/name: cloudflared
+                  app.kubernetes.io/component: controller
               topologyKey: kubernetes.io/hostname
-            - labelSelector:
-                matchLabels:
-                  app.kubernetes.io/component: single-binary
-              topologyKey: node.kubernetes.io/proxmox-node
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: topology.kubernetes.io/zone
+          whenUnsatisfiable: ScheduleAnyway
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: cloudflared
+              app.kubernetes.io/component: controller

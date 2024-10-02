@@ -1,12 +1,12 @@
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: cloudflared-homelab
+  name: cloudflared-controller
   namespace: cloudflared
   labels:
-    cloudflared-tunnel: cloudflared-homelab
+    app.kubernetes.io/name: cloudflared
 spec:
   maxUnavailable: 50%
   selector:
     matchLabels:
-      app: cloudflared-controller
+      app.kubernetes.io/name: cloudflared

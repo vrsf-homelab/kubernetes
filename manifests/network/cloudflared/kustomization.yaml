@@ -1,0 +1,9 @@
+namespace: cloudflared
+
+resources:
+  - resources/namespace.yaml
+  - resources/configmap.yaml
+  - resources/deployment.yaml
+  - resources/pdb.yaml
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
