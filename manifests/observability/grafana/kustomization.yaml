@@ -1,5 +1,7 @@
 resources:
   - resources/namespace.yaml
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
 
 namespace: &namespace grafana
 
@@ -12,8 +14,8 @@ helmCharts:
     valuesFile: values.yaml
     includeCRDs: true
 
-generators:
-  - generators/sops-generator.yaml
+# generators:
+#   - generators/sops-generator.yaml
 
 configMapGenerator:
   - name: grafana-dashboards-default
