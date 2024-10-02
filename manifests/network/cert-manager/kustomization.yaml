@@ -1,5 +1,8 @@
 resources:
   - resources/namespace.yaml
+  - resources/cluster-issuer.yaml
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
 
 ## https://github.com/kubernetes-sigs/kustomize/issues/4593
 # namespace: &namespace cert-manager
@@ -12,6 +15,3 @@ helmCharts:
     namespace: cert-manager
     valuesFile: values.yaml
     includeCRDs: true
-
-generators:
-  - generators/sops-generator.yaml
