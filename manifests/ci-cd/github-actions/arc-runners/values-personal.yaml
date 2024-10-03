@@ -3,7 +3,7 @@ githubConfigSecret: arc-gha-runner-personal
 
 runnerScaleSetName: personal
 
-minRunners: 1
+minRunners: 0
 maxRunners: 5
 
 containerMode:
