@@ -1,8 +1,9 @@
 # TODO: Separate runners from controller
 namespace: &namespace arc-runners
 
-generators:
-  - generators/sops-generator.yaml
+resources:
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
 
 helmCharts:
   - releaseName: arc-runner-personal
