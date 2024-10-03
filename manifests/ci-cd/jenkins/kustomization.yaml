@@ -1,12 +1,11 @@
+namespace: &namespace jenkins
+
 resources:
   - resources/namespace.yaml
   - resources/role.yaml
   - resources/role-binding.yaml
-
-namespace: &namespace jenkins
-
-generators:
-  - generators/sops-generator.yaml
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
 
 helmCharts:
   - name: jenkins
