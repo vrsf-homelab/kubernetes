@@ -2,7 +2,6 @@
 namespace: &namespace arc-runners
 
 resources:
-  - resources/vso.yaml
   - resources/vso-secrets.yaml
 
 helmCharts:
