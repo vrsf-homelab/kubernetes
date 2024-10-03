@@ -1,0 +1,24 @@
+# TODO: Separate runners from controller
+namespace: &namespace arc-runners
+
+resources:
+  - resources/vso.yaml
+  - resources/vso-secrets-personal.yaml
+  - resources/vso-secrets-homelab.yaml
+
+helmCharts:
+  - releaseName: arc-runner-personal
+    name: gha-runner-scale-set
+    version: 0.9.3
+    repo: oci://ghcr.io/actions/actions-runner-controller-charts
+    namespace: *namespace
+    valuesFile: values-personal.yaml
+    includeCRDs: true
+
+  - releaseName: arc-runner-homelab
+    name: gha-runner-scale-set
+    version: 0.9.3
+    repo: oci://ghcr.io/actions/actions-runner-controller-charts
+    namespace: *namespace
+    valuesFile: values-homelab.yaml
+    includeCRDs: true
