@@ -22,7 +22,7 @@ singleBinary:
           podAffinityTerm:
             labelSelector:
               matchLabels:
-                app: example-app
+                app.kubernetes.io/name: loki
             topologyKey: kubernetes.io/hostname
 
 loki:
