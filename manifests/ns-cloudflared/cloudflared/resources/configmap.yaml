@@ -22,4 +22,9 @@ data:
       originRequest:
         httpHostHeader: vlt.vrsf.in
         noTLSVerify: true
+    - hostname: "argocd.vrsf.in"
+      service: https://nginx-ingress-ingress-nginx-controller.ingress-controller.svc.cluster.local:443
+      originRequest:
+        httpHostHeader: argocd.vrsf.in
+        noTLSVerify: true
     - service: http_status:404
