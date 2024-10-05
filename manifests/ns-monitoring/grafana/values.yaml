@@ -13,6 +13,10 @@ resources:
 grafana.ini:
   server:
     root_url: https://grafana.vrsf.in
+  auth.ldap:
+    enabled: true
+    allow_sign_up: true
+    config_file: /etc/grafana/ldap.toml
 
 ingress:
   enabled: true
