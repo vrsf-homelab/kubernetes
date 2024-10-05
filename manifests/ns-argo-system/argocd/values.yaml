@@ -1,6 +1,6 @@
 global:
   domain: argocd.vrsf.in
-  revisionHistoryLimit: 5
+  revisionHistoryLimit: 10
 
   image:
     repository: vertisan/argocd
@@ -28,6 +28,9 @@ crds:
   keep: false
 
 configs:
+  secret:
+    createSecret: false
+
   cm:
     kustomize.buildOptions: "--enable-helm --enable-alpha-plugins --enable-exec"
     users.anonymous.enabled: "false"
@@ -36,6 +39,40 @@ configs:
       secrets+age-import, secrets+age-import-kubernetes,
       secrets,secrets+literal,
       http,https
+    dex.config: |
+      connectors:
+      - type: ldap
+        name: LDAP
+        id: ldap
+        config:
+          host: "ldap.vrsf.in"
+          insecureNoSSL: true
+          insecureSkipVerify: true
+          bindDN: "$dex.ldap.bindDN"
+          bindPW: "$dex.ldap.bindPW"
+          usernamePrompt: Username
+          userSearch:
+            baseDN: "cn=users,dc=ldap,dc=vrsf,dc=in"
+            filter: "(|(memberOf=cn=argocd,cn=groups,dc=ldap,dc=vrsf,dc=in)(memberOf=cn=homelab-guest,cn=groups,dc=ldap,dc=vrsf,dc=in))"
+            username: uid
+            idAttr: uid
+            emailAttr: mail
+            nameAttr: displayName
+          groupSearch:
+            baseDN: "cn=groups,dc=ldap,dc=vrsf,dc=in"
+            filter: ""
+            userMatchers:
+              - userAttr: uid
+                groupAttr: memberUid
+            nameAttr: cn
+
+  rbac:
+    policy.csv: |
+      p, role:guest, applications, list, *, allow
+      p, role:guest, applications, get, *, allow
+
+      g, argocd, role:admin
+      g, homelab-guest, role:guest
 
 controller:
   resources:
@@ -46,7 +83,7 @@ controller:
       cpu: 1500m
       memory: 2Gi
   pdb:
-    maxUnavailable: 0
+    maxUnavailable: 50%
   metrics: &metricsMonitor
     enabled: true
     serviceMonitor:
@@ -55,7 +92,12 @@ controller:
         release: prometheus
 
 dex:
+  enabled: true
   metrics: *metricsMonitor
+
+  pdb:
+    enabled: true
+    maxUnavailable: 50%
 
 repoServer:
   metrics: *metricsMonitor
@@ -75,7 +117,7 @@ server:
     tls: true
   pdb:
     enabled: true
-    maxUnavailable: 0
+    maxUnavailable: 50%
 
 redis:
   metrics: *metricsMonitor
