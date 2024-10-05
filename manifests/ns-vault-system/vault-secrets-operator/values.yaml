@@ -30,7 +30,7 @@ controller:
 
 defaultVaultConnection:
   enabled: true
-  address: "https://vlt.vrsf.in:8200"
+  address: "https://vlt.vrsf.in"
   skipTLSVerify: true # Disable after resolving "unknown authority"
 
 telemetry:
