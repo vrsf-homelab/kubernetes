@@ -115,7 +115,7 @@ datasources:
         isDefault: false
 
 admin:
-  existingSecret: "grafana-admin-credentials"
+  existingSecret: grafana-admin-credentials
   userKey: adminUser
   passwordKey: adminPassword
 
