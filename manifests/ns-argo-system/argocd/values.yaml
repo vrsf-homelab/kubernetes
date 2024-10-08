@@ -41,38 +41,28 @@ configs:
       http,https
     dex.config: |
       connectors:
-      - type: ldap
-        name: LDAP
-        id: ldap
+      - type: oidc
+        id: authentik
+        name: Authentik
         config:
-          host: "ldap.vrsf.in"
-          insecureNoSSL: true
-          insecureSkipVerify: true
-          bindDN: "$dex.ldap.bindDN"
-          bindPW: "$dex.ldap.bindPW"
-          usernamePrompt: Username
-          userSearch:
-            baseDN: "cn=users,dc=ldap,dc=vrsf,dc=in"
-            filter: "(|(memberOf=cn=argocd,cn=groups,dc=ldap,dc=vrsf,dc=in)(memberOf=cn=homelab-guest,cn=groups,dc=ldap,dc=vrsf,dc=in))"
-            username: uid
-            idAttr: uid
-            emailAttr: mail
-            nameAttr: displayName
-          groupSearch:
-            baseDN: "cn=groups,dc=ldap,dc=vrsf,dc=in"
-            filter: ""
-            userMatchers:
-              - userAttr: uid
-                groupAttr: memberUid
-            nameAttr: cn
+          issuer: https://auth.vrsf.in/application/o/argocd/
+          clientID: $dex.authentik.clientId
+          clientSecret: $dex.authentik.clientSecret
+          insecureEnableGroups: true
+          scopes:
+            - openid
+            - profile
+            - email
+            - offline_access
 
   rbac:
     policy.csv: |
       p, role:guest, applications, list, *, allow
       p, role:guest, applications, get, *, allow
 
-      g, argocd, role:admin
-      g, homelab-guest, role:guest
+      g, argocd_admin, role:admin
+      g, argocd_viewer, role:readonly
+      g, argocd_guest, role:guest
 
 controller:
   resources:
