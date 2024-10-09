@@ -43,7 +43,7 @@ configs:
       connectors:
       - type: oidc
         id: authentik
-        name: Authentik
+        name: VRS-Factory
         config:
           issuer: https://auth.vrsf.in/application/o/argocd/
           clientID: $dex.authentik.clientId
@@ -53,13 +53,11 @@ configs:
             - openid
             - profile
             - email
-            - offline_access
 
   rbac:
     policy.csv: |
       p, role:guest, applications, list, *, allow
       p, role:guest, applications, get, *, allow
-
       g, argocd_admin, role:admin
       g, argocd_viewer, role:readonly
       g, argocd_guest, role:guest
