@@ -104,19 +104,19 @@ datasources:
         orgId: 1
         url: https://prometheus.vrsf.in
         isDefault: true
-      - name: NAS
-        type: prometheus
-        uid: CDJXD4RE6MU4GB
-        access: proxy
-        orgId: 1
-        url: http://10.69.20.1:10190
-        isDefault: false
-      - name: Homelab
-        type: loki
-        uid: ddxl2zug16xhcb
-        orgId: 1
-        url: https://loki-gw.vrsf.in
-        isDefault: false
+      # - name: NAS
+      #   type: prometheus
+      #   uid: CDJXD4RE6MU4GB
+      #   access: proxy
+      #   orgId: 1
+      #   url: http://10.69.20.1:10190
+      #   isDefault: false
+      # - name: Homelab
+      #   type: loki
+      #   uid: ddxl2zug16xhcb
+      #   orgId: 1
+      #   url: https://loki-gw.vrsf.in
+      #   isDefault: false
 
 admin:
   existingSecret: grafana-admin-credentials
