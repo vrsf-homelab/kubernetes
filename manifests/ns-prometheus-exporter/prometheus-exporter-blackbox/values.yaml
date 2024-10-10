@@ -1,5 +1,5 @@
 podDisruptionBudget:
-  maxUnavailable: 0
+  maxUnavailable: 50%
 
 serviceMonitor:
   enabled: true
@@ -9,13 +9,31 @@ serviceMonitor:
   targets:
     - name: vrs-factory
       url: https://vrs-factory.dev
+      labels:
+        service-type: website
     - name: vrs-factory-pl
       url: https://vrs-factory.pl
+      labels:
+        service-type: website
     - name: argocd
       url: https://argocd.vrsf.in
+      labels:
+        service-type: ci-cd
     - name: grafana
       url: https://grafana.vrsf.in
+      labels:
+        service-type: monitoring
     - name: prometheus
       url: https://prometheus.vrsf.in
-    - name: jenkins
-      url: https://jenkins.vrsf.in/login
+      labels:
+        service-type: monitoring
+    - name: pve-alpha
+      url: https://alpha.pve.vrsf.in:8006
+      labels:
+        service-type: proxmox
+    - name: pve-beta
+      url: https://beta.pve.vrsf.in:8006
+      labels:
+        service-type: proxmox
+    # - name: jenkins
+    #   url: https://jenkins.vrsf.in/login
