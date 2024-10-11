@@ -38,6 +38,13 @@ prometheus:
             app.kubernetes.io/name: prometheus
             app.kubernetes.io/instance: prometheus-kube-prometheus-prometheus
 
+    alertingEndpoints:
+      - apiVersion: v2
+        name: alertmanager
+        namespace: monitoring
+        pathPrefix: /
+        port: http
+
   ingress:
     enabled: true
     annotations:
