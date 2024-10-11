@@ -59,5 +59,8 @@ kube-state-metrics:
     - namespaces=[*]
     - pods=[*]
 
+alertmanager:
+  enabled: false
+
 defaultRules:
   create: false
