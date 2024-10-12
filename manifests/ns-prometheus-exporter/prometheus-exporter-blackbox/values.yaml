@@ -1,5 +1,27 @@
+replicas: 2
+
 podDisruptionBudget:
   maxUnavailable: 50%
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: prometheus-blackbox-exporter
+        app.kubernetes.io/name: prometheus-blackbox-exporter
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: prometheus-blackbox-exporter
+              app.kubernetes.io/name: prometheus-blackbox-exporter
+          topologyKey: kubernetes.io/hostname
 
 serviceMonitor:
   enabled: true

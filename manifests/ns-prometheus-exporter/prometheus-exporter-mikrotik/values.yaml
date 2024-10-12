@@ -1,3 +1,5 @@
+replicaCount: 2
+
 serviceMonitor:
   enabled: true
   additionalLabels:
@@ -8,3 +10,23 @@ config:
     existingSecret: mikrotik-router-config
   scrapper:
     existingSecret: mikrotik-scrapper-config
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/instance: prometheus-mikrotik-exporter
+              app.kubernetes.io/name: prometheus-mikrotik-exporter
+          topologyKey: kubernetes.io/hostname
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: prometheus-mikrotik-exporter
+        app.kubernetes.io/name: prometheus-mikrotik-exporter
