@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alertmanager
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: alertmanager.rules
+      rules:
+        - alert: AlertmanagerTargetMissing
+          expr: |-
+            sum(kube_pod_container_status_running{container="alertmanager", namespace="monitoring"}) < 2
+          for: 5m
+          annotations:
+            summary: Alertmanager target missing (instance {{ $labels.instance }})
+            description: "A Prometheus target has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: warning
+
+        - alert: AlertmanagerAllTargetsMissing
+          expr: |-
+            sum(kube_pod_container_status_running{container="alertmanager", namespace="monitoring"}) == 0
+          for: 10m
+          annotations:
+            summary: Alertmanager target missing (instance {{ $labels.instance }})
+            description: "A Prometheus all targets has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: critical

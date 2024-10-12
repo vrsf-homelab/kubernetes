@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: speedtest
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: speedtest.rules
+      rules:
+        - alert: SpeedtestSlowInternetDownload
+          expr: |-
+            (avg_over_time(mktxp_internet_bandwidth{direction="download"}[10m]) * 0.000001) < 100
+          for: 0m
+          annotations:
+            summary: SpeedTest Slow Internet Download (instance {{ $labels.instance }})
+            description: "Internet download speed is currently {{humanize $value}} Mbps.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: warning
+
+        - alert: SpeedtestSlowInternetUpload
+          expr: |-
+            (avg_over_time(mktxp_internet_bandwidth{direction="upload"}[10m]) * 0.000001) < 20
+          for: 0m
+          annotations:
+            summary: SpeedTest Slow Internet Upload (instance {{ $labels.instance }})
+            description: "Internet upload speed is currently {{humanize $value}} Mbps.\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: warning

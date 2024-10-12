@@ -1,0 +1,24 @@
+namespace: &ns monitoring
+
+resources:
+  - resources/namespace.yaml
+  - resources/rules-alertmanager.yaml
+  - resources/rules-argocd.yaml
+  - resources/rules-blackbox.yaml
+  - resources/rules-kubernetes.yaml
+  - resources/rules-prometheus.yaml
+  - resources/rules-speedtest.yaml
+  # - resources/rules-vault.yaml # Enable after adding a ServiceMonitor for Vault metrics
+  - resources/rules-vso.yaml
+  - resources/service-monitor.yaml
+
+helmCharts:
+  - name: alertmanager
+    repo: https://prometheus-community.github.io/helm-charts
+    version: 1.13.0
+    releaseName: alertmanager
+    namespace: *ns
+    valuesFile: values.yaml
+    includeCRDs: true
+    apiVersions:
+      - policy/v1/PodDisruptionBudget

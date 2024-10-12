@@ -1,0 +1,39 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: prometheus
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: prometheus.rules
+      rules:
+        - alert: PrometheusTargetMissing
+          expr: |-
+            sum(up{container="prometheus"}) < 2
+          for: 5m
+          annotations:
+            summary: Prometheus target missing (instance {{ $labels.instance }})
+            description: "A Prometheus target has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: warning
+
+        - alert: PrometheusAllTargetsMissing
+          expr: |-
+            sum(up{container="prometheus"}) == 0
+          for: 10m
+          annotations:
+            summary: Prometheus target missing (instance {{ $labels.instance }})
+            description: "A Prometheus all targets has disappeared\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+          labels:
+            severity: critical
+
+        # - alert: PrometheusTimeseriesCardinality
+        #   expr: |-
+        #     label_replace(count by(__name__) ({__name__=~".+"}), "name", "$1", "__name__", "(.+)") > 10000
+        #   for: 0m
+        #   annotations:
+        #     summary: Prometheus timeseries cardinality (instance {{ $labels.instance }})
+        #     description: "The \"{{ $labels.name }}\" timeseries cardinality is getting very high: {{ $value }}\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+        #   labels:
+        #     severity: warning

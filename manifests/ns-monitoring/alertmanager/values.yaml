@@ -1,0 +1,43 @@
+replicaCount: 2
+
+baseURL: https://alerts.vrsf.in
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  hosts:
+    - host: alerts.vrsf.in
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: alerts-tls
+      hosts:
+        - alerts.vrsf.in
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 32Mi
+  limits:
+    cpu: 50m
+    memory: 128Mi
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: alertmanager
+
+# CRDs WTF?
+podDisruptionBudget:
+  maxUnavailable: 1
+
+persistence:
+  storageClass: nfs-csi
+  size: 1Gi

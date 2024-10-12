@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: vault-secrets-operator
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: vso.rules
+      rules:
+        - alert: VaultAuthFailed
+          expr: |-
+            controller_resource_status{controller="vaultauth"} == 0
+          for: 10m
+          annotations:
+            description: Authentication to Vault has failed
+          labels:
+            severity: critical
+
+        - alert: VaultConnectionFailed
+          expr: |-
+            controller_resource_status{controller="vaultconnection"} == 0
+          for: 10m
+          annotations:
+            description: Connection to Vault has failed
+          labels:
+            severity: critical
