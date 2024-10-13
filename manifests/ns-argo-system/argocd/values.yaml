@@ -65,10 +65,10 @@ configs:
 controller:
   resources:
     requests:
-      cpu: 500m
+      cpu: 100m
       memory: 768Mi
     limits:
-      cpu: 1500m
+      cpu: 300m
       memory: 2Gi
   pdb:
     maxUnavailable: 50%

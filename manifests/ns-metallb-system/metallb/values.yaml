@@ -1,13 +1,20 @@
 speaker:
   resources:
-    limits:
-      cpu: 75m
+    requests:
+      cpu: 15m
       memory: 150Mi
+    limits:
+      cpu: 30m
+      memory: 256Mi
+
 controller:
   resources:
+    requests:
+      cpu: 5m
+      memory: 72Mi
     limits:
-      cpu: 100m
-      memory: 100Mi
+      cpu: 20m
+      memory: 128Mi
 
   affinity:
     nodeAffinity:

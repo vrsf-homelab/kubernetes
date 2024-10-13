@@ -18,15 +18,21 @@ controller:
 
   manager:
     resources:
+      requests:
+        cpu: 5m
+        memory: 32Mi
       limits:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 20m
+        memory: 64Mi
 
   kubeRbacProxy:
     resources:
+      requests:
+        cpu: 5m
+        memory: 24Mi
       limits:
-        cpu: 50m
-        memory: 128Mi
+        cpu: 20m
+        memory: 48Mi
 
 defaultVaultConnection:
   enabled: true

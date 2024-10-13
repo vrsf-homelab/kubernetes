@@ -1,6 +1,14 @@
 controller:
   replicaCount: 2
 
+  resources:
+    requests:
+      cpu: 10m
+      memory: 72Mi
+    limits:
+      cpu: 15m
+      memory: 128Mi
+
   metrics:
     enabled: true
     serviceMonitor:

@@ -5,6 +5,14 @@ serviceMonitor:
   additionalLabels:
     release: prometheus
 
+resources:
+  requests:
+    cpu: 5m
+    memory: 64Mi
+  limits:
+    cpu: 20m
+    memory: 256Mi
+
 config:
   router:
     existingSecret: mikrotik-router-config

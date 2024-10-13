@@ -3,6 +3,14 @@ replicas: 2
 podDisruptionBudget:
   maxUnavailable: 50%
 
+resources:
+  requests:
+    memory: 32Mi
+    cpu: 10m
+  limits:
+    memory: 48Mi
+    cpu: 15m
+
 topologySpreadConstraints:
   - maxSkew: 1
     topologyKey: topology.kubernetes.io/zone
