@@ -150,7 +150,7 @@ affinity:
       nodeSelectorTerms:
         - matchExpressions:
             - key: node-role.kubernetes.io/control-plane
-              operator: DoesNotExists
+              operator: DoesNotExist
 
 topologySpreadConstraints:
   - labelSelector:
