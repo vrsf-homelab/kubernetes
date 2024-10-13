@@ -26,10 +26,10 @@ serviceMonitor:
 grafana.ini:
   server:
     root_url: https://grafana.vrsf.in
-  auth.ldap:
-    enabled: true
-    allow_sign_up: true
-    config_file: /etc/grafana/ldap.toml
+  # auth.ldap:
+  #   enabled: true
+  #   allow_sign_up: true
+  #   config_file: /etc/grafana/ldap.toml
 
 ingress:
   enabled: true
@@ -140,6 +140,30 @@ admin:
   userKey: adminUser
   passwordKey: adminPassword
 
-ldap:
-  enabled: true
-  existingSecret: ldap-config
+# ldap:
+#   enabled: true
+#   existingSecret: ldap-config
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: DoesNotExists
+
+topologySpreadConstraints:
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/instance: grafana
+    topologyKey: topology.kubernetes.io/zone
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: grafana
+        app.kubernetes.io/instance: grafana
+    topologyKey: kubernetes.io/hostname
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
