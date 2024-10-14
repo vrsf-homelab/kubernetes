@@ -13,8 +13,8 @@ resources:
 autoscaling:
   enabled: true
   minReplicas: 1
-  maxReplicas: 3
-  targetCPU: "60"
+  maxReplicas: 2
+  targetCPU: "80"
   targetMemory: "80"
   behavior: {}
 
@@ -26,10 +26,6 @@ serviceMonitor:
 grafana.ini:
   server:
     root_url: https://grafana.vrsf.in
-  # auth.ldap:
-  #   enabled: true
-  #   allow_sign_up: true
-  #   config_file: /etc/grafana/ldap.toml
 
 ingress:
   enabled: true
@@ -117,32 +113,10 @@ datasources:
         orgId: 1
         url: https://prometheus.vrsf.in
         isDefault: true
-      # - name: NAS
-      #   type: prometheus
-      #   uid: CDJXD4RE6MU4GB
-      #   access: proxy
-      #   orgId: 1
-      #   url: http://10.69.20.1:10190
-      #   isDefault: false
-      # - name: Homelab
-      #   type: loki
-      #   uid: ddxl2zug16xhcb
-      #   orgId: 1
-      #   url: https://loki-gw.vrsf.in
-      #   isDefault: false
-    deleteDatasources:
-      - name: "Homelab"
-        orgId: 1
-      - name: "NAS"
-        orgId: 1
 admin:
   existingSecret: grafana-admin-credentials
   userKey: adminUser
   passwordKey: adminPassword
-
-# ldap:
-#   enabled: true
-#   existingSecret: ldap-config
 
 affinity:
   nodeAffinity:
