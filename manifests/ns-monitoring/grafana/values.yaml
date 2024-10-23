@@ -10,14 +10,6 @@ resources:
     cpu: 50m
     memory: 512Mi
 
-autoscaling:
-  enabled: true
-  minReplicas: 1
-  maxReplicas: 2
-  targetCPU: "80"
-  targetMemory: "80"
-  behavior: {}
-
 serviceMonitor:
   enabled: true
   labels:
