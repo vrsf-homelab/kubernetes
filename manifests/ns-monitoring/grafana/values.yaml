@@ -39,17 +39,6 @@ persistence:
   accessModes:
     - ReadWriteMany
 
-datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-      - name: Kubernetes
-        type: prometheus
-        uid: PA37D07FE30048D3A
-        access: proxy
-        orgId: 1
-        url: https://prometheus.vrsf.in
-        isDefault: true
 admin:
   existingSecret: grafana-admin-credentials
   userKey: adminUser
