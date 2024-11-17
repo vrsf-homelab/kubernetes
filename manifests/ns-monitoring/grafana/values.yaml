@@ -5,10 +5,10 @@ podDisruptionBudget:
 resources:
   requests:
     cpu: 20m
-    memory: 128Mi
+    memory: 512Mi
   limits:
     cpu: 50m
-    memory: 512Mi
+    memory: 1Gi
 
 serviceMonitor:
   enabled: true
@@ -33,11 +33,14 @@ ingress:
         - grafana.vrsf.in
 
 persistence:
-  enabled: true
-  storageClassName: nfs-csi
-  size: 10Gi
-  accessModes:
-    - ReadWriteMany
+  # enabled: true
+  # storageClassName: nfs-csi
+  # size: 10Gi
+  # accessModes:
+  #   - ReadWriteMany
+  inMemory:
+    enabled: true
+    sizeLimit: 384Mi
 
 admin:
   existingSecret: grafana-admin-credentials
