@@ -3,7 +3,7 @@ resources:
   - resources/vso.yaml
   - resources/vso-secrets.yaml
 
-namespace: &namespace grafana
+namespace: &namespace monitoring
 
 helmCharts:
   - name: grafana
