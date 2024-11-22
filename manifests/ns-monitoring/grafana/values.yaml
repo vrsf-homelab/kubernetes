@@ -33,14 +33,11 @@ ingress:
         - grafana.vrsf.in
 
 persistence:
-  # enabled: true
-  # storageClassName: nfs-csi
-  # size: 10Gi
-  # accessModes:
-  #   - ReadWriteMany
-  inMemory:
-    enabled: true
-    sizeLimit: 384Mi
+  enabled: true
+  storageClassName: nfs-csi
+  size: 10Gi
+  accessModes:
+    - ReadWriteMany
 
 admin:
   existingSecret: grafana-admin-credentials
