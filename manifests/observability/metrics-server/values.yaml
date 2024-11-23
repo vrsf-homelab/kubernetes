@@ -1,0 +1,21 @@
+replicas: 2
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+args:
+  - --kubelet-insecure-tls
+
+metrics:
+  enabled: true
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    release: prometheus
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 100Mi
