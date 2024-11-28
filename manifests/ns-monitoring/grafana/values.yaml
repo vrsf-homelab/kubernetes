@@ -4,10 +4,10 @@ podDisruptionBudget:
 
 resources:
   requests:
-    cpu: 20m
+    cpu: 100m
     memory: 512Mi
   limits:
-    cpu: 50m
+    cpu: 200m
     memory: 1Gi
 
 serviceMonitor:
