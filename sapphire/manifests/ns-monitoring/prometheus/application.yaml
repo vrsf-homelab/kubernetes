@@ -1,0 +1,28 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: &ns argo-system
+spec:
+  project: ns-monitoring
+  source:
+    repoURL: git@github.com:vrsf-homelab/kubernetes.git
+    targetRevision: master
+    path: sapphire/manifests/ns-monitoring/prometheus
+  destination:
+    server: XXXs
+    namespace: *ns
+  ignoreDifferences:
+    - group: "admissionregistration.k8s.io/v1"
+      kind: ValidatingWebhookConfiguration
+      name: prometheus-kube-prometheus-admission
+      jsonPointers:
+        - ".webhooks[].clientConfig.caBundle"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true

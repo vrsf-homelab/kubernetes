@@ -1,0 +1,14 @@
+resources:
+  - resources/namespace.yaml
+  - resources/storage-class.yaml
+
+namespace: nfs-csi-system
+
+helmCharts:
+  - name: csi-driver-nfs
+    repo: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
+    version: 4.7.0 # https://github.com/kubernetes-csi/csi-driver-nfs/releases
+    releaseName: csi-driver-nfs
+    namespace: nfs-csi-system
+    includeCRDs: true
+# TODO: Add patch to disable 'local-path' as default

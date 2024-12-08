@@ -1,0 +1,73 @@
+grafana:
+  enabled: false
+
+prometheus:
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 0
+
+  prometheusSpec:
+    replicas: 1
+    retention: 30d
+
+    resources:
+      requests:
+        cpu: 100m
+        memory: 2048Mi
+      limits:
+        cpu: 150m
+        memory: 3072Mi
+
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: nfs-csi
+          accessModes: ["ReadWriteMany"]
+          resources:
+            requests:
+              storage: 50Gi
+
+    podAntiAffinity: soft
+    podAntiAffinityTopologyKey: kubernetes.io/hostname
+    topologySpreadConstraints:
+      - maxSkew: 1
+        topologyKey: topology.kubernetes.io/zone
+        whenUnsatisfiable: DoNotSchedule
+        labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: prometheus
+            app.kubernetes.io/instance: prometheus-kube-prometheus-prometheus
+
+    alertingEndpoints:
+      - apiVersion: v2
+        name: alertmanager
+        namespace: monitoring
+        pathPrefix: /
+        port: http
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    ingressClassName: nginx
+    hosts:
+      - prometheus.vrsf.in
+    paths:
+      - /
+    tls:
+      - secretName: prometheus-tls
+        hosts:
+          - prometheus.vrsf.in
+
+kube-state-metrics:
+  metricLabelsAllowlist:
+    - nodes=[*]
+    - namespaces=[*]
+    - pods=[*]
+
+alertmanager:
+  enabled: false
+
+defaultRules:
+  create: false
