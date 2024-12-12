@@ -8,7 +8,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.0.20.30
-  share: /volume1/k8s-cluster
+  share: /volume1/homelab_k8s_sapphire
 reclaimPolicy: Delete
 volumeBindingMode: WaitForFirstConsumer
 mountOptions:
@@ -25,7 +25,7 @@ metadata:
 provisioner: nfs.csi.k8s.io
 parameters:
   server: 10.0.20.30
-  share: /volume1/k8s-cluster
+  share: /volume1/homelab_k8s_sapphire
 reclaimPolicy: Retain
 volumeBindingMode: WaitForFirstConsumer
 mountOptions:
