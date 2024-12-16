@@ -39,7 +39,7 @@ spec:
       volumes:
         - name: test
           secret:
-            secretName: static-secret
+            secretName: example-static-secret
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
