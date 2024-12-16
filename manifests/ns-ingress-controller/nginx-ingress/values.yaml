@@ -3,11 +3,11 @@ controller:
 
   resources:
     requests:
-      cpu: 10m
-      memory: 72Mi
-    limits:
-      cpu: 15m
+      cpu: 50m
       memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 512Mi
 
   metrics:
     enabled: true
