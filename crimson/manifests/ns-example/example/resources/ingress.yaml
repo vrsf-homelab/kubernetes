@@ -16,7 +16,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: example
+                name: example-app
                 port:
                   number: 443
   tls:
