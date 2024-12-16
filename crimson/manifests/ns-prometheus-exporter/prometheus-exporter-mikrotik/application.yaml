@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-exporter-mikrotik
+  namespace: &ns argo-system
+spec:
+  project: ns-prometheus-exporter
+  source:
+    repoURL: git@github.com:vrsf-homelab/kubernetes.git
+    targetRevision: master
+    path: crimson/manifests/ns-prometheus-exporter/prometheus-exporter-mikrotik
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: *ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

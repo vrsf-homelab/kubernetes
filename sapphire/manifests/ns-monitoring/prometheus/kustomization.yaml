@@ -1,0 +1,13 @@
+resources:
+  - resources/namespace.yaml
+
+namespace: &namespace prometheus
+
+helmCharts:
+  - name: kube-prometheus-stack
+    repo: https://prometheus-community.github.io/helm-charts
+    version: 58.5.3 # https://github.com/prometheus-community/helm-charts/releases
+    releaseName: prometheus
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
