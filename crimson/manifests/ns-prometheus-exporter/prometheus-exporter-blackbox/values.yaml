@@ -57,18 +57,19 @@ serviceMonitor:
       url: https://vrs-factory.dev
     - name: vrs-factory-pl
       url: https://vrs-factory.pl
-    - name: argocd
+    - name: helm-vrs-factory
+      url: https://helm.vrs-factory.dev/index.yaml
+    - name: homelab-argocd
       url: https://argocd.vrsf.in
-    - name: grafana
+    - name: homelab-grafana
       url: https://grafana.vrsf.in
-    - name: prometheus
+    - name: homelab-prometheus
       url: https://prometheus.vrsf.in
-    - name: pve-alpha
-      url: https://10.0.20.31:8006
-      module: http_2xx
-    - name: pve-beta
-      url: https://10.0.20.32:8006
-    # - name: pve-charlie
-    #   url: https://10.0.20.33:8006
-    - name: pve-tango
-      url: https://10.0.20.34:8006
+    - name: homelab-pve-alpha
+      url: https://alpha.pve.vrsf.in:8006
+    - name: homelab-pve-beta
+      url: https://beta.pve.vrsf.in:8006
+    # - name: homelab-pve-charlie
+    #   url: https://charlie.pve.vrsf.in:8006
+    - name: homelab-pve-tango
+      url: https://tango.pve.vrsf.in:8006
