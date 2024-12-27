@@ -48,8 +48,10 @@ serviceMonitor:
     - name: prometheus
       url: https://prometheus.vrsf.in
     - name: pve-alpha
-      url: https://alpha.pve.vrsf.in:8006
+      url: https://10.0.20.31:8006
     - name: pve-beta
-      url: https://beta.pve.vrsf.in:8006
-    # - name: jenkins
-    #   url: https://jenkins.vrsf.in/login
+      url: https://10.0.20.32:8006
+    # - name: pve-charlie
+    #   url: https://10.0.20.33:8006
+    - name: pve-tango
+      url: https://10.0.20.34:8006

@@ -3,7 +3,7 @@ namespace: &namespace prometheus-exporter
 helmCharts:
   - name: prometheus-blackbox-exporter
     repo: https://prometheus-community.github.io/helm-charts
-    version: 8.16.0 # https://github.com/prometheus-community/helm-charts/releases?q=%22prometheus-blackbox-exporter%22&expanded=true
+    version: 9.1.0 # https://github.com/prometheus-community/helm-charts/releases?q=%22prometheus-blackbox-exporter%22&expanded=true
     releaseName: prometheus-blackbox-exporter
     namespace: *namespace
     valuesFile: values.yaml
