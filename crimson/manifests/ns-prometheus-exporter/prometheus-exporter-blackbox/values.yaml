@@ -24,6 +24,8 @@ config:
         preferred_ip_protocol: "ip4"
         fail_if_ssl: false
         fail_if_not_ssl: false
+        tls_config:
+          insecure_skip_verify: false
 
 topologySpreadConstraints:
   - maxSkew: 1
