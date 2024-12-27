@@ -39,20 +39,20 @@ configs:
       secrets+age-import, secrets+age-import-kubernetes,
       secrets,secrets+literal,
       http,https
-    dex.config: |
-      connectors:
-      - type: oidc
-        id: authentik
-        name: VRS-Factory
-        config:
-          issuer: https://auth.vrsf.in/application/o/argocd/
-          clientID: $dex.authentik.clientId
-          clientSecret: $dex.authentik.clientSecret
-          insecureEnableGroups: true
-          scopes:
-            - openid
-            - profile
-            - email
+    # dex.config: |
+    #   connectors:
+    #   - type: oidc
+    #     id: authentik
+    #     name: VRS-Factory
+    #     config:
+    #       issuer: https://auth.vrsf.in/application/o/argocd/
+    #       clientID: $dex.authentik.clientId
+    #       clientSecret: $dex.authentik.clientSecret
+    #       insecureEnableGroups: true
+    #       scopes:
+    #         - openid
+    #         - profile
+    #         - email
 
   rbac:
     policy.csv: |
