@@ -1,7 +1,8 @@
 resources:
   - resources/namespace.yaml
-  - resources/ingress-vault.yaml
   - resources/ingress-authentik.yaml
+  - resources/ingress-consul.yaml
+  - resources/ingress-vault.yaml
 
 namespace: &namespace ingress-controller
 
