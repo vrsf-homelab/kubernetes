@@ -1,0 +1,21 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gitlab-runners
+  namespace: &ns argo-system
+spec:
+  project: ns-gitlab
+  source:
+    repoURL: git@github.com:vrsf-homelab/kubernetes.git
+    targetRevision: master
+    path: crimson/manifests/ns-gitlab/gitlab-runners
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: *ns
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

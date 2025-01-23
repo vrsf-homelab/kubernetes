@@ -1,0 +1,23 @@
+gitlabUrl: https://gitlab.com/
+
+image:
+  registry: registry.gitlab.com
+  image: gitlab-org/gitlab-runner
+  # tag: alpine-v{{.Chart.AppVersion}}
+
+rbac:
+  create: true
+
+metrics:
+  enabled: true
+
+  serviceMonitor:
+    enabled: true
+    labels:
+      release: prometheus
+
+service:
+  enabled: true
+
+runners:
+  secret: gitlab-runner

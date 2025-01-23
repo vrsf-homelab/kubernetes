@@ -1,0 +1,15 @@
+namespace: &namespace gitlab
+
+resources:
+  - resources/namespace.yaml
+  - resources/vso.yaml
+  - resources/vso-secrets.yaml
+
+helmCharts:
+  - releaseName: gitlab-runners
+    repo: https://charts.gitlab.io
+    name: gitlab-runner
+    version: 0.73.2
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
