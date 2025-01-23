@@ -8,6 +8,15 @@ subsets:
       - ip: 10.0.30.11
     ports:
       - port: 8500
+---
+apiVersion: v1
+kind: Endpoints
+metadata:
+  name: external-consul-dns
+subsets:
+  - addresses:
+      - ip: 10.0.30.11
+    ports:
       - port: 8600
 ---
 apiVersion: v1
@@ -49,7 +58,7 @@ spec:
             path: "/"
             backend:
               service:
-                name: external-consul
+                name: external-consul-dns
                 port:
                   number: 53
   tls:
