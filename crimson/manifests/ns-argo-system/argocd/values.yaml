@@ -4,7 +4,7 @@ global:
 
   image:
     repository: vertisan/argocd
-    tag: 0.2.0
+    tag: 0.3.0
 
   logging:
     format: json
