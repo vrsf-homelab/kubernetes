@@ -25,9 +25,11 @@ metadata:
   name: external-consul
 spec:
   ports:
-    - port: 443
+    - name: ui
+      port: 443
       targetPort: 8500
-    - port: 53
+    - name: dns
+      port: 53
       targetPort: 8600
 ---
 apiVersion: networking.k8s.io/v1
