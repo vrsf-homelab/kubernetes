@@ -27,7 +27,7 @@ runners:
     [[runners]]
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
-        image = "alpine"
+        image = "fedora:41"
 
         [[runners.kubernetes.volumes.host_path]]
           name = "buildah"
