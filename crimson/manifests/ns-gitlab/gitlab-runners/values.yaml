@@ -8,6 +8,8 @@ image:
 rbac:
   create: true
 
+replicas: 4
+
 metrics:
   enabled: true
 
@@ -21,3 +23,42 @@ service:
 
 runners:
   secret: gitlab-runner
+  config: |
+    [[runners]]
+      [runners.kubernetes]
+        namespace = "{{.Release.Namespace}}"
+        image = "alpine"
+
+        [[runners.kubernetes.volumes.host_path]]
+          name = "buildah"
+          mount_path = "/var/lib/containers/"
+          read_only = false
+
+topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: ScheduleAnyway
+    labelSelector:
+      matchLabels:
+        app: gitlab-runners
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: node-role.kubernetes.io/control-plane
+              operator: DoesNotExist
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app: gitlab-runners
+          topologyKey: kubernetes.io/hostname
+
+resources:
+  limits:
+    memory: 1024Mi
+    cpu: 300m
