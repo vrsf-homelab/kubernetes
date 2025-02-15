@@ -3,8 +3,8 @@ githubConfigSecret: arc-gha-runner-homelab
 
 runnerScaleSetName: homelab
 
-minRunners: 0
-maxRunners: 3
+minRunners: 1
+maxRunners: 5
 
 containerMode:
   type: dind
