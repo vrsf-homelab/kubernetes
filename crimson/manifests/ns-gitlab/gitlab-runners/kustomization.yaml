@@ -2,6 +2,7 @@ namespace: &namespace gitlab
 
 resources:
   - resources/namespace.yaml
+  - resources/service-monitor.yaml
   - resources/vso.yaml
   - resources/vso-secrets.yaml
 
@@ -13,3 +14,6 @@ helmCharts:
     namespace: *namespace
     valuesFile: values.yaml
     includeCRDs: true
+    apiVersions:
+      - monitoring.coreos.com/v1
+      - monitoring.coreos.com/v1/ServiceMonitor

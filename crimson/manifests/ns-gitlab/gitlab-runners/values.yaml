@@ -13,26 +13,49 @@ replicas: 4
 metrics:
   enabled: true
 
-  serviceMonitor:
-    enabled: true
-    labels:
-      release: prometheus
+  # Service Monitor is deployed from resources to match labels.
 
 service:
   enabled: true
 
+readinessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
 runners:
   secret: gitlab-runner
+
+  cache:
+    secretName: s3access
+
   config: |
     [[runners]]
       [runners.kubernetes]
         namespace = "{{.Release.Namespace}}"
         image = "fedora:41"
+        privileged = true
 
         [[runners.kubernetes.volumes.host_path]]
           name = "buildah"
           mount_path = "/var/lib/containers/"
           read_only = false
+
+        [runners.kubernetes.pod_labels]
+          "app" = "{{.Release.Name}}"
+
+        [runners.kubernetes.node_tolerations]
+          "node-role.kubernetes.io/control-plane" = "NoSchedule"
+
+      [runners.cache]
+        Type = "s3"
+        Shared = true
+        [runners.cache.s3]
+          ServerAddress = "s3.minio.vrsf.in"
+          BucketName = "gitlab-runners-cache"
+          BucketLocation = "vrs-central"
+          Insecure = false
 
 topologySpreadConstraints:
   - maxSkew: 1
@@ -59,6 +82,9 @@ affinity:
           topologyKey: kubernetes.io/hostname
 
 resources:
+  requests:
+    memory: 512Mi
+    cpu: 100m
   limits:
-    memory: 1024Mi
-    cpu: 300m
+    memory: 2048Mi
+    cpu: 500m

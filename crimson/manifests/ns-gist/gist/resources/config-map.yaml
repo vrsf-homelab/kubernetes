@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: opengist-config
+data:
+  # Learn more about Opengist configuration here:
+  # https://github.com/thomiceli/opengist/blob/master/docs/configuration/configure.md
+  # https://github.com/thomiceli/opengist/blob/master/docs/configuration/cheat-sheet.md
+
+  # Set the log level to one of the following: debug, info, warn, error, fatal. Default: warn
+  log-level: info
+
+  # Set the log output to one or more of the following: `stdout`, `file`. Default: stdout,file
+  log-output: stdout
+
+  # Public URL to access to Opengist
+  external-url: gist.vrsf.in
+
+  # Enable or disable the code search index (either `true` or `false`). Default: true
+  index.enabled: "false"
+
+  # Enable or disable git operations (clone, pull, push) via HTTP (either `true` or `false`). Default: true
+  http.git-enabled: "false"
+
+  # Enable or disable SSH built-in server
+  # for git operations (clone, pull, push) via SSH (either `true` or `false`). Default: true
+  ssh.git-enabled: "false"
