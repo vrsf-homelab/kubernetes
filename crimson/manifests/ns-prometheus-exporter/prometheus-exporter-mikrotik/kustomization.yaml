@@ -7,7 +7,7 @@ namespace: &namespace prometheus-exporter
 helmCharts:
   - name: prometheus-mikrotik-exporter
     repo: https://helm.vrs-factory.dev
-    version: 0.5.2 # https://github.com/vertisan/helm-charts/releases
+    version: 0.5.3 # https://github.com/vertisan/helm-charts/releases
     releaseName: prometheus-mikrotik-exporter
     namespace: *namespace
     valuesFile: values.yaml
