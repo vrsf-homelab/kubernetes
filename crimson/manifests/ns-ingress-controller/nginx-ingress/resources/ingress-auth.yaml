@@ -2,17 +2,17 @@
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: external-authentik
+  name: external-auth
 subsets:
   - addresses:
-      - ip: 10.0.20.30
+      - ip: 10.0.108.10
     ports:
       - port: 443
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-authentik
+  name: external-auth
 spec:
   ports:
     - port: 443
@@ -21,7 +21,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: external-authentik
+  name: external-auth
   annotations:
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
@@ -36,10 +36,10 @@ spec:
             path: "/"
             backend:
               service:
-                name: external-authentik
+                name: external-auth
                 port:
                   number: 443
   tls:
     - hosts:
         - auth.vrsf.in
-      secretName: external-authentik-tls
+      secretName: external-auth-tls
