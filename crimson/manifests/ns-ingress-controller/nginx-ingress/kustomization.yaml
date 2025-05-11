@@ -1,6 +1,6 @@
 resources:
   - resources/namespace.yaml
-  - resources/ingress-authentik.yaml
+  - resources/ingress-auth.yaml
   - resources/ingress-consul.yaml
   - resources/ingress-vault.yaml
 
