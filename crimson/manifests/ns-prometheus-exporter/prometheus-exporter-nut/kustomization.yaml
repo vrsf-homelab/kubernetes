@@ -1,0 +1,12 @@
+namespace: &namespace prometheus-exporter
+
+helmCharts:
+  - name: nut-exporter
+    repo: https://git.shivering-isles.com/api/v4/projects/233/packages/helm/main
+    version: 0.4.0
+    releaseName: prometheus-nut-exporter
+    namespace: *namespace
+    valuesFile: values.yaml
+    includeCRDs: true
+    apiVersions:
+      - policy/v1/PodDisruptionBudget

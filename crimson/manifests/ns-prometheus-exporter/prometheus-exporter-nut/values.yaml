@@ -1,0 +1,41 @@
+dashboard:
+  enabled: false
+
+podMonitor:
+  labels:
+    release: prometheus
+  relabelings:
+    - sourceLabels: [__param_ups]
+      targetLabel: ups
+
+# extraArgs:
+#   - --log.level=debug
+
+env:
+  - name: NUT_EXPORTER_SERVER
+    value: 10.0.20.30
+  - name: NUT_EXPORTER_USERNAME
+    value: monuser
+  - name: NUT_EXPORTER_PASSWORD
+    value: secret
+  - name: NUT_EXPORTER_VARIABLES
+    value: "battery.charge,battery.charge.low,battery.runtime,battery.voltage,battery.voltage.nominal,input.voltage,input.frequency,input.voltage.nominal,ups.load,ups.status,ups.firmware,ups.power,ups.realpower,ups.power.nominal,ups.beeper.status,output.frequency,output.voltage,output.voltage.nominal"
+
+# envSecret:
+#   NUT_EXPORTER_PASSWORD: "mypasswd"
+
+# env:
+#   - name: NUT_EXPORTER_SERVER
+#     value: "127.0.0.1"
+#   - name: NUT_EXPORTER_USERNAME
+#     value: "admin"
+#   # - name: NUT_EXPORTER_USERNAME
+#   #   valueFrom:
+#   #     secretKeyRef:
+#   #       name: nut-credentials
+#   #       key: username
+#   # - name: NUT_EXPORTER_PASSWORD
+#   #   valueFrom:
+#   #     secretKeyRef:
+#   #       name: nut-credentials
+#   #       key: password
