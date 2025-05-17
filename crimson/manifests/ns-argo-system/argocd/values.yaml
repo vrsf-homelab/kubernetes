@@ -40,7 +40,7 @@ configs:
       secrets,secrets+literal,
       http,https
     oidc.config: |
-      name: VRS-Factory Auth
+      name: VRSF Auth
       issuer: https://auth.vrsf.in
       clientID: $oidc.clientId
       clientSecret: $oidc.clientSecret
