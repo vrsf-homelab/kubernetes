@@ -39,6 +39,17 @@ configs:
       secrets+age-import, secrets+age-import-kubernetes,
       secrets,secrets+literal,
       http,https
+    oidc_config: |
+      name: VRS-Factory Auth
+      issuer: https://auth.vrsf.in
+      clientID: $oidc.clientId
+      clientSecret: $oidc.clientSecret
+      requestedScopes:
+        - openid
+        - profile
+        - email
+        - groups
+      logoutURL: https://auth.vrsf.in/oidc/v1/end_session
     # dex.config: |
     #   connectors:
     #   - type: oidc
